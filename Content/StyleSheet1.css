@@ -3,11 +3,8 @@
     padding: 0px;
     margin: 0px;
 }
-.heroDiv{
-    background-image: url("Images/bg_img.jpg");
-    background-repeat: no-repeat;
-    background-size: cover;
-    min-height: 80vh;
+.heroDiv {
+    
 }
 .textDiv{
     padding: 150px 0px 0px 50px;
