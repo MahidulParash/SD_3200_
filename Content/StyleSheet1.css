@@ -11,6 +11,33 @@
 }
 .textDiv{
     padding: 150px 0px 0px 50px;
-    
+}
+.cardDiv{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 0px 10px;
 
+}
+@media only screen and (max-width: 700px){
+    .cardDiv {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 0px 10px;
+    }
+}
+.image img{
+    width: 100%;
+    height: 300px;
+}
+.textCenter{
+    text-align: center;
+}
+.aboutUs {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0px 10px;
+}
+.stats{
+    padding-left: 200px;
+    margin-bottom 100px;
 }

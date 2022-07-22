@@ -134,6 +134,9 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Images\bg_img.jpg" />
+    <Content Include="Content\Images\drawing_img.jpg" />
+    <Content Include="Content\Images\guitar_img.jpg" />
+    <Content Include="Content\Images\origami_bg.jpg" />
     <Content Include="Content\StyleSheet1.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
