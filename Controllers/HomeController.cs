@@ -26,5 +26,10 @@ namespace SD_3200_.Controllers
 
             return View();
         }
+
+        public ActionResult HomePage()
+        {
+            return View();
+        }
     }
 }
