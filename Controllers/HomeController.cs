@@ -26,7 +26,18 @@ namespace SD_3200_.Controllers
 
             return View();
         }
+        public ActionResult Courses()
+        {
+            ViewBag.Message = "Your contact page.";
 
+            return View();
+        }
+        public ActionResult ContactUs()
+        {
+            ViewBag.Message = "Your contact page.";
+
+            return View();
+        }
         public ActionResult HomePage()
         {
             return View();
