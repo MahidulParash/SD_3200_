@@ -1,0 +1,746 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="elearningModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'elearning.dbo.answer' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="answer">
+          <Key>
+            <PropertyRef Name="answer_ID" />
+          </Key>
+          <Property Name="answer_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="question_ID" Type="int" />
+          <Property Name="answer" Type="varchar" MaxLength="10" />
+          <Property Name="option_a" Type="varchar" MaxLength="10" />
+          <Property Name="option_b" Type="varchar" MaxLength="10" />
+          <Property Name="option_c" Type="varchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="attempts">
+          <Key>
+            <PropertyRef Name="attempt_ID" />
+          </Key>
+          <Property Name="attempt_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="student_ID" Type="int" />
+          <Property Name="quiz_ID" Type="int" />
+          <Property Name="grade" Type="varchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="courses">
+          <Key>
+            <PropertyRef Name="course_ID" />
+          </Key>
+          <Property Name="course_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="instructor_ID" Type="int" />
+          <Property Name="course_name" Type="varchar" MaxLength="10" />
+          <Property Name="course_desc" Type="varchar(max)" />
+          <Property Name="course_image" Type="varchar" MaxLength="50" />
+          <Property Name="course_duration" Type="int" />
+          <Property Name="course_price" Type="float" />
+        </EntityType>
+        <EntityType Name="enroll">
+          <Key>
+            <PropertyRef Name="enroll_ID" />
+          </Key>
+          <Property Name="enroll_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="course_ID" Type="int" />
+          <Property Name="student_ID" Type="int" />
+          <Property Name="enroll_date" Type="date" />
+        </EntityType>
+        <EntityType Name="feedback">
+          <Key>
+            <PropertyRef Name="feedback_id" />
+          </Key>
+          <Property Name="feedback_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="student_id" Type="int" />
+          <Property Name="feedback_text" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="instructor">
+          <Key>
+            <PropertyRef Name="instructor_ID" />
+          </Key>
+          <Property Name="instructor_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="instructor_name" Type="varchar" MaxLength="50" />
+          <Property Name="instructor_email" Type="varchar" MaxLength="50" />
+          <Property Name="instructor_password" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="lessons">
+          <Key>
+            <PropertyRef Name="lesson_ID" />
+          </Key>
+          <Property Name="lesson_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="course_ID" Type="int" />
+          <Property Name="lesson_name" Type="varchar" MaxLength="50" />
+          <Property Name="lesson_desc" Type="varchar(max)" />
+          <Property Name="lesson_link" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="question">
+          <Key>
+            <PropertyRef Name="question_ID" />
+          </Key>
+          <Property Name="question_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="course_ID" Type="int" />
+          <Property Name="quiz_ID" Type="int" />
+          <Property Name="question" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="quiz">
+          <Key>
+            <PropertyRef Name="quiz_ID" />
+          </Key>
+          <Property Name="quiz_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="course_ID" Type="int" />
+          <Property Name="quiz_duration" Type="int" />
+          <Property Name="no_of_questions" Type="int" />
+        </EntityType>
+        <EntityType Name="student">
+          <Key>
+            <PropertyRef Name="studentID" />
+          </Key>
+          <Property Name="studentID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="studentEmail" Type="varchar" MaxLength="50" />
+          <Property Name="studentName" Type="varchar" MaxLength="50" />
+          <Property Name="studentPass" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK__answer__question__2A4B4B5E">
+          <End Role="question" Type="Self.question" Multiplicity="0..1" />
+          <End Role="answer" Type="Self.answer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="question">
+              <PropertyRef Name="question_ID" />
+            </Principal>
+            <Dependent Role="answer">
+              <PropertyRef Name="question_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__attempts__quiz_I__286302EC">
+          <End Role="quiz" Type="Self.quiz" Multiplicity="0..1" />
+          <End Role="attempts" Type="Self.attempts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="quiz">
+              <PropertyRef Name="quiz_ID" />
+            </Principal>
+            <Dependent Role="attempts">
+              <PropertyRef Name="quiz_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__attempts__studen__276EDEB3">
+          <End Role="student" Type="Self.student" Multiplicity="0..1" />
+          <End Role="attempts" Type="Self.attempts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="student">
+              <PropertyRef Name="studentID" />
+            </Principal>
+            <Dependent Role="attempts">
+              <PropertyRef Name="student_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__courses__instruc__08EA5793">
+          <End Role="instructor" Type="Self.instructor" Multiplicity="0..1" />
+          <End Role="courses" Type="Self.courses" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="instructor">
+              <PropertyRef Name="instructor_ID" />
+            </Principal>
+            <Dependent Role="courses">
+              <PropertyRef Name="instructor_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__enroll__course_I__0DAF0CB0">
+          <End Role="courses" Type="Self.courses" Multiplicity="0..1" />
+          <End Role="enroll" Type="Self.enroll" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="courses">
+              <PropertyRef Name="course_ID" />
+            </Principal>
+            <Dependent Role="enroll">
+              <PropertyRef Name="course_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__enroll__student___0EA330E9">
+          <End Role="student" Type="Self.student" Multiplicity="0..1" />
+          <End Role="enroll" Type="Self.enroll" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="student">
+              <PropertyRef Name="studentID" />
+            </Principal>
+            <Dependent Role="enroll">
+              <PropertyRef Name="student_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__feedback__studen__1367E606">
+          <End Role="student" Type="Self.student" Multiplicity="0..1" />
+          <End Role="feedback" Type="Self.feedback" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="student">
+              <PropertyRef Name="studentID" />
+            </Principal>
+            <Dependent Role="feedback">
+              <PropertyRef Name="student_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__lessons__course___182C9B23">
+          <End Role="courses" Type="Self.courses" Multiplicity="0..1" />
+          <End Role="lessons" Type="Self.lessons" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="courses">
+              <PropertyRef Name="course_ID" />
+            </Principal>
+            <Dependent Role="lessons">
+              <PropertyRef Name="course_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__question__course__21B6055D">
+          <End Role="courses" Type="Self.courses" Multiplicity="0..1" />
+          <End Role="question" Type="Self.question" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="courses">
+              <PropertyRef Name="course_ID" />
+            </Principal>
+            <Dependent Role="question">
+              <PropertyRef Name="course_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__question__quiz_I__22AA2996">
+          <End Role="quiz" Type="Self.quiz" Multiplicity="0..1" />
+          <End Role="question" Type="Self.question" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="quiz">
+              <PropertyRef Name="quiz_ID" />
+            </Principal>
+            <Dependent Role="question">
+              <PropertyRef Name="quiz_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__quiz__course_ID__1CF15040">
+          <End Role="courses" Type="Self.courses" Multiplicity="0..1" />
+          <End Role="quiz" Type="Self.quiz" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="courses">
+              <PropertyRef Name="course_ID" />
+            </Principal>
+            <Dependent Role="quiz">
+              <PropertyRef Name="course_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="elearningModelStoreContainer">
+          <EntitySet Name="attempts" EntityType="Self.attempts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="courses" EntityType="Self.courses" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="enroll" EntityType="Self.enroll" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="feedback" EntityType="Self.feedback" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="instructor" EntityType="Self.instructor" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="lessons" EntityType="Self.lessons" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="question" EntityType="Self.question" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="quiz" EntityType="Self.quiz" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="student" EntityType="Self.student" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="answer" EntityType="Self.answer" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [answer].[answer_ID] AS [answer_ID], 
+    [answer].[question_ID] AS [question_ID], 
+    [answer].[answer] AS [answer], 
+    [answer].[option_a] AS [option_a], 
+    [answer].[option_b] AS [option_b], 
+    [answer].[option_c] AS [option_c]
+    FROM [dbo].[answer] AS [answer]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK__answer__question__2A4B4B5E" Association="Self.FK__answer__question__2A4B4B5E">
+            <End Role="question" EntitySet="question" />
+            <End Role="answer" EntitySet="answer" />
+          </AssociationSet>
+          <AssociationSet Name="FK__attempts__quiz_I__286302EC" Association="Self.FK__attempts__quiz_I__286302EC">
+            <End Role="quiz" EntitySet="quiz" />
+            <End Role="attempts" EntitySet="attempts" />
+          </AssociationSet>
+          <AssociationSet Name="FK__attempts__studen__276EDEB3" Association="Self.FK__attempts__studen__276EDEB3">
+            <End Role="student" EntitySet="student" />
+            <End Role="attempts" EntitySet="attempts" />
+          </AssociationSet>
+          <AssociationSet Name="FK__courses__instruc__08EA5793" Association="Self.FK__courses__instruc__08EA5793">
+            <End Role="instructor" EntitySet="instructor" />
+            <End Role="courses" EntitySet="courses" />
+          </AssociationSet>
+          <AssociationSet Name="FK__enroll__course_I__0DAF0CB0" Association="Self.FK__enroll__course_I__0DAF0CB0">
+            <End Role="courses" EntitySet="courses" />
+            <End Role="enroll" EntitySet="enroll" />
+          </AssociationSet>
+          <AssociationSet Name="FK__enroll__student___0EA330E9" Association="Self.FK__enroll__student___0EA330E9">
+            <End Role="student" EntitySet="student" />
+            <End Role="enroll" EntitySet="enroll" />
+          </AssociationSet>
+          <AssociationSet Name="FK__feedback__studen__1367E606" Association="Self.FK__feedback__studen__1367E606">
+            <End Role="student" EntitySet="student" />
+            <End Role="feedback" EntitySet="feedback" />
+          </AssociationSet>
+          <AssociationSet Name="FK__lessons__course___182C9B23" Association="Self.FK__lessons__course___182C9B23">
+            <End Role="courses" EntitySet="courses" />
+            <End Role="lessons" EntitySet="lessons" />
+          </AssociationSet>
+          <AssociationSet Name="FK__question__course__21B6055D" Association="Self.FK__question__course__21B6055D">
+            <End Role="courses" EntitySet="courses" />
+            <End Role="question" EntitySet="question" />
+          </AssociationSet>
+          <AssociationSet Name="FK__question__quiz_I__22AA2996" Association="Self.FK__question__quiz_I__22AA2996">
+            <End Role="quiz" EntitySet="quiz" />
+            <End Role="question" EntitySet="question" />
+          </AssociationSet>
+          <AssociationSet Name="FK__quiz__course_ID__1CF15040" Association="Self.FK__quiz__course_ID__1CF15040">
+            <End Role="courses" EntitySet="courses" />
+            <End Role="quiz" EntitySet="quiz" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="elearningModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="attempt">
+          <Key>
+            <PropertyRef Name="attempt_ID" />
+          </Key>
+          <Property Name="attempt_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="student_ID" Type="Int32" />
+          <Property Name="quiz_ID" Type="Int32" />
+          <Property Name="grade" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="quiz" Relationship="Self.FK__attempts__quiz_I__286302EC" FromRole="attempts" ToRole="quiz" />
+          <NavigationProperty Name="student" Relationship="Self.FK__attempts__studen__276EDEB3" FromRole="attempts" ToRole="student" />
+        </EntityType>
+        <EntityType Name="cours">
+          <Key>
+            <PropertyRef Name="course_ID" />
+          </Key>
+          <Property Name="course_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="instructor_ID" Type="Int32" />
+          <Property Name="course_name" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="course_desc" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="course_image" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="course_duration" Type="Int32" />
+          <Property Name="course_price" Type="Double" />
+          <NavigationProperty Name="instructor" Relationship="Self.FK__courses__instruc__08EA5793" FromRole="courses" ToRole="instructor" />
+          <NavigationProperty Name="enrolls" Relationship="Self.FK__enroll__course_I__0DAF0CB0" FromRole="courses" ToRole="enroll" />
+          <NavigationProperty Name="lessons" Relationship="Self.FK__lessons__course___182C9B23" FromRole="courses" ToRole="lessons" />
+          <NavigationProperty Name="questions" Relationship="Self.FK__question__course__21B6055D" FromRole="courses" ToRole="question" />
+          <NavigationProperty Name="quizs" Relationship="Self.FK__quiz__course_ID__1CF15040" FromRole="courses" ToRole="quiz" />
+        </EntityType>
+        <EntityType Name="enroll">
+          <Key>
+            <PropertyRef Name="enroll_ID" />
+          </Key>
+          <Property Name="enroll_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="course_ID" Type="Int32" />
+          <Property Name="student_ID" Type="Int32" />
+          <Property Name="enroll_date" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="cours" Relationship="Self.FK__enroll__course_I__0DAF0CB0" FromRole="enroll" ToRole="courses" />
+          <NavigationProperty Name="student" Relationship="Self.FK__enroll__student___0EA330E9" FromRole="enroll" ToRole="student" />
+        </EntityType>
+        <EntityType Name="feedback">
+          <Key>
+            <PropertyRef Name="feedback_id" />
+          </Key>
+          <Property Name="feedback_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="student_id" Type="Int32" />
+          <Property Name="feedback_text" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="student" Relationship="Self.FK__feedback__studen__1367E606" FromRole="feedback" ToRole="student" />
+        </EntityType>
+        <EntityType Name="instructor">
+          <Key>
+            <PropertyRef Name="instructor_ID" />
+          </Key>
+          <Property Name="instructor_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="instructor_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="instructor_email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="instructor_password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="courses" Relationship="Self.FK__courses__instruc__08EA5793" FromRole="instructor" ToRole="courses" />
+        </EntityType>
+        <EntityType Name="lesson">
+          <Key>
+            <PropertyRef Name="lesson_ID" />
+          </Key>
+          <Property Name="lesson_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="course_ID" Type="Int32" />
+          <Property Name="lesson_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="lesson_desc" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="lesson_link" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="cours" Relationship="Self.FK__lessons__course___182C9B23" FromRole="lessons" ToRole="courses" />
+        </EntityType>
+        <EntityType Name="question">
+          <Key>
+            <PropertyRef Name="question_ID" />
+          </Key>
+          <Property Name="question_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="course_ID" Type="Int32" />
+          <Property Name="quiz_ID" Type="Int32" />
+          <Property Name="question1" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="cours" Relationship="Self.FK__question__course__21B6055D" FromRole="question" ToRole="courses" />
+          <NavigationProperty Name="answers" Relationship="Self.FK__answer__question__2A4B4B5E" FromRole="question" ToRole="answer" />
+          <NavigationProperty Name="quiz" Relationship="Self.FK__question__quiz_I__22AA2996" FromRole="question" ToRole="quiz" />
+        </EntityType>
+        <EntityType Name="quiz">
+          <Key>
+            <PropertyRef Name="quiz_ID" />
+          </Key>
+          <Property Name="quiz_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="course_ID" Type="Int32" />
+          <Property Name="quiz_duration" Type="Int32" />
+          <Property Name="no_of_questions" Type="Int32" />
+          <NavigationProperty Name="attempts" Relationship="Self.FK__attempts__quiz_I__286302EC" FromRole="quiz" ToRole="attempts" />
+          <NavigationProperty Name="cours" Relationship="Self.FK__quiz__course_ID__1CF15040" FromRole="quiz" ToRole="courses" />
+          <NavigationProperty Name="questions" Relationship="Self.FK__question__quiz_I__22AA2996" FromRole="quiz" ToRole="question" />
+        </EntityType>
+        <EntityType Name="student">
+          <Key>
+            <PropertyRef Name="studentID" />
+          </Key>
+          <Property Name="studentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="studentEmail" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="studentName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="studentPass" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="attempts" Relationship="Self.FK__attempts__studen__276EDEB3" FromRole="student" ToRole="attempts" />
+          <NavigationProperty Name="enrolls" Relationship="Self.FK__enroll__student___0EA330E9" FromRole="student" ToRole="enroll" />
+          <NavigationProperty Name="feedbacks" Relationship="Self.FK__feedback__studen__1367E606" FromRole="student" ToRole="feedback" />
+        </EntityType>
+        <EntityType Name="answer">
+          <Key>
+            <PropertyRef Name="answer_ID" />
+          </Key>
+          <Property Name="answer_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="question_ID" Type="Int32" />
+          <Property Name="answer1" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="option_a" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="option_b" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="option_c" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="question" Relationship="Self.FK__answer__question__2A4B4B5E" FromRole="answer" ToRole="question" />
+        </EntityType>
+        <Association Name="FK__attempts__quiz_I__286302EC">
+          <End Role="quiz" Type="Self.quiz" Multiplicity="0..1" />
+          <End Role="attempts" Type="Self.attempt" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="quiz">
+              <PropertyRef Name="quiz_ID" />
+            </Principal>
+            <Dependent Role="attempts">
+              <PropertyRef Name="quiz_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__attempts__studen__276EDEB3">
+          <End Role="student" Type="Self.student" Multiplicity="0..1" />
+          <End Role="attempts" Type="Self.attempt" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="student">
+              <PropertyRef Name="studentID" />
+            </Principal>
+            <Dependent Role="attempts">
+              <PropertyRef Name="student_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__courses__instruc__08EA5793">
+          <End Role="instructor" Type="Self.instructor" Multiplicity="0..1" />
+          <End Role="courses" Type="Self.cours" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="instructor">
+              <PropertyRef Name="instructor_ID" />
+            </Principal>
+            <Dependent Role="courses">
+              <PropertyRef Name="instructor_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__enroll__course_I__0DAF0CB0">
+          <End Role="courses" Type="Self.cours" Multiplicity="0..1" />
+          <End Role="enroll" Type="Self.enroll" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="courses">
+              <PropertyRef Name="course_ID" />
+            </Principal>
+            <Dependent Role="enroll">
+              <PropertyRef Name="course_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__lessons__course___182C9B23">
+          <End Role="courses" Type="Self.cours" Multiplicity="0..1" />
+          <End Role="lessons" Type="Self.lesson" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="courses">
+              <PropertyRef Name="course_ID" />
+            </Principal>
+            <Dependent Role="lessons">
+              <PropertyRef Name="course_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__question__course__21B6055D">
+          <End Role="courses" Type="Self.cours" Multiplicity="0..1" />
+          <End Role="question" Type="Self.question" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="courses">
+              <PropertyRef Name="course_ID" />
+            </Principal>
+            <Dependent Role="question">
+              <PropertyRef Name="course_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__quiz__course_ID__1CF15040">
+          <End Role="courses" Type="Self.cours" Multiplicity="0..1" />
+          <End Role="quiz" Type="Self.quiz" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="courses">
+              <PropertyRef Name="course_ID" />
+            </Principal>
+            <Dependent Role="quiz">
+              <PropertyRef Name="course_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__enroll__student___0EA330E9">
+          <End Role="student" Type="Self.student" Multiplicity="0..1" />
+          <End Role="enroll" Type="Self.enroll" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="student">
+              <PropertyRef Name="studentID" />
+            </Principal>
+            <Dependent Role="enroll">
+              <PropertyRef Name="student_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__feedback__studen__1367E606">
+          <End Role="student" Type="Self.student" Multiplicity="0..1" />
+          <End Role="feedback" Type="Self.feedback" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="student">
+              <PropertyRef Name="studentID" />
+            </Principal>
+            <Dependent Role="feedback">
+              <PropertyRef Name="student_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__answer__question__2A4B4B5E">
+          <End Role="question" Type="Self.question" Multiplicity="0..1" />
+          <End Role="answer" Type="Self.answer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="question">
+              <PropertyRef Name="question_ID" />
+            </Principal>
+            <Dependent Role="answer">
+              <PropertyRef Name="question_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__question__quiz_I__22AA2996">
+          <End Role="quiz" Type="Self.quiz" Multiplicity="0..1" />
+          <End Role="question" Type="Self.question" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="quiz">
+              <PropertyRef Name="quiz_ID" />
+            </Principal>
+            <Dependent Role="question">
+              <PropertyRef Name="quiz_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="elearningEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="attempts" EntityType="Self.attempt" />
+          <EntitySet Name="courses" EntityType="Self.cours" />
+          <EntitySet Name="enrolls" EntityType="Self.enroll" />
+          <EntitySet Name="feedbacks" EntityType="Self.feedback" />
+          <EntitySet Name="instructors" EntityType="Self.instructor" />
+          <EntitySet Name="lessons" EntityType="Self.lesson" />
+          <EntitySet Name="questions" EntityType="Self.question" />
+          <EntitySet Name="quizs" EntityType="Self.quiz" />
+          <EntitySet Name="students" EntityType="Self.student" />
+          <EntitySet Name="answers" EntityType="Self.answer" />
+          <AssociationSet Name="FK__attempts__quiz_I__286302EC" Association="Self.FK__attempts__quiz_I__286302EC">
+            <End Role="quiz" EntitySet="quizs" />
+            <End Role="attempts" EntitySet="attempts" />
+          </AssociationSet>
+          <AssociationSet Name="FK__attempts__studen__276EDEB3" Association="Self.FK__attempts__studen__276EDEB3">
+            <End Role="student" EntitySet="students" />
+            <End Role="attempts" EntitySet="attempts" />
+          </AssociationSet>
+          <AssociationSet Name="FK__courses__instruc__08EA5793" Association="Self.FK__courses__instruc__08EA5793">
+            <End Role="instructor" EntitySet="instructors" />
+            <End Role="courses" EntitySet="courses" />
+          </AssociationSet>
+          <AssociationSet Name="FK__enroll__course_I__0DAF0CB0" Association="Self.FK__enroll__course_I__0DAF0CB0">
+            <End Role="courses" EntitySet="courses" />
+            <End Role="enroll" EntitySet="enrolls" />
+          </AssociationSet>
+          <AssociationSet Name="FK__lessons__course___182C9B23" Association="Self.FK__lessons__course___182C9B23">
+            <End Role="courses" EntitySet="courses" />
+            <End Role="lessons" EntitySet="lessons" />
+          </AssociationSet>
+          <AssociationSet Name="FK__question__course__21B6055D" Association="Self.FK__question__course__21B6055D">
+            <End Role="courses" EntitySet="courses" />
+            <End Role="question" EntitySet="questions" />
+          </AssociationSet>
+          <AssociationSet Name="FK__quiz__course_ID__1CF15040" Association="Self.FK__quiz__course_ID__1CF15040">
+            <End Role="courses" EntitySet="courses" />
+            <End Role="quiz" EntitySet="quizs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__enroll__student___0EA330E9" Association="Self.FK__enroll__student___0EA330E9">
+            <End Role="student" EntitySet="students" />
+            <End Role="enroll" EntitySet="enrolls" />
+          </AssociationSet>
+          <AssociationSet Name="FK__feedback__studen__1367E606" Association="Self.FK__feedback__studen__1367E606">
+            <End Role="student" EntitySet="students" />
+            <End Role="feedback" EntitySet="feedbacks" />
+          </AssociationSet>
+          <AssociationSet Name="FK__answer__question__2A4B4B5E" Association="Self.FK__answer__question__2A4B4B5E">
+            <End Role="question" EntitySet="questions" />
+            <End Role="answer" EntitySet="answers" />
+          </AssociationSet>
+          <AssociationSet Name="FK__question__quiz_I__22AA2996" Association="Self.FK__question__quiz_I__22AA2996">
+            <End Role="quiz" EntitySet="quizs" />
+            <End Role="question" EntitySet="questions" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="elearningModelStoreContainer" CdmEntityContainer="elearningEntities">
+          <EntitySetMapping Name="attempts">
+            <EntityTypeMapping TypeName="elearningModel.attempt">
+              <MappingFragment StoreEntitySet="attempts">
+                <ScalarProperty Name="attempt_ID" ColumnName="attempt_ID" />
+                <ScalarProperty Name="student_ID" ColumnName="student_ID" />
+                <ScalarProperty Name="quiz_ID" ColumnName="quiz_ID" />
+                <ScalarProperty Name="grade" ColumnName="grade" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="courses">
+            <EntityTypeMapping TypeName="elearningModel.cours">
+              <MappingFragment StoreEntitySet="courses">
+                <ScalarProperty Name="course_ID" ColumnName="course_ID" />
+                <ScalarProperty Name="instructor_ID" ColumnName="instructor_ID" />
+                <ScalarProperty Name="course_name" ColumnName="course_name" />
+                <ScalarProperty Name="course_desc" ColumnName="course_desc" />
+                <ScalarProperty Name="course_image" ColumnName="course_image" />
+                <ScalarProperty Name="course_duration" ColumnName="course_duration" />
+                <ScalarProperty Name="course_price" ColumnName="course_price" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="enrolls">
+            <EntityTypeMapping TypeName="elearningModel.enroll">
+              <MappingFragment StoreEntitySet="enroll">
+                <ScalarProperty Name="enroll_ID" ColumnName="enroll_ID" />
+                <ScalarProperty Name="course_ID" ColumnName="course_ID" />
+                <ScalarProperty Name="student_ID" ColumnName="student_ID" />
+                <ScalarProperty Name="enroll_date" ColumnName="enroll_date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="feedbacks">
+            <EntityTypeMapping TypeName="elearningModel.feedback">
+              <MappingFragment StoreEntitySet="feedback">
+                <ScalarProperty Name="feedback_id" ColumnName="feedback_id" />
+                <ScalarProperty Name="student_id" ColumnName="student_id" />
+                <ScalarProperty Name="feedback_text" ColumnName="feedback_text" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="instructors">
+            <EntityTypeMapping TypeName="elearningModel.instructor">
+              <MappingFragment StoreEntitySet="instructor">
+                <ScalarProperty Name="instructor_ID" ColumnName="instructor_ID" />
+                <ScalarProperty Name="instructor_name" ColumnName="instructor_name" />
+                <ScalarProperty Name="instructor_email" ColumnName="instructor_email" />
+                <ScalarProperty Name="instructor_password" ColumnName="instructor_password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="lessons">
+            <EntityTypeMapping TypeName="elearningModel.lesson">
+              <MappingFragment StoreEntitySet="lessons">
+                <ScalarProperty Name="lesson_ID" ColumnName="lesson_ID" />
+                <ScalarProperty Name="course_ID" ColumnName="course_ID" />
+                <ScalarProperty Name="lesson_name" ColumnName="lesson_name" />
+                <ScalarProperty Name="lesson_desc" ColumnName="lesson_desc" />
+                <ScalarProperty Name="lesson_link" ColumnName="lesson_link" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="questions">
+            <EntityTypeMapping TypeName="elearningModel.question">
+              <MappingFragment StoreEntitySet="question">
+                <ScalarProperty Name="question_ID" ColumnName="question_ID" />
+                <ScalarProperty Name="course_ID" ColumnName="course_ID" />
+                <ScalarProperty Name="quiz_ID" ColumnName="quiz_ID" />
+                <ScalarProperty Name="question1" ColumnName="question" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="quizs">
+            <EntityTypeMapping TypeName="elearningModel.quiz">
+              <MappingFragment StoreEntitySet="quiz">
+                <ScalarProperty Name="quiz_ID" ColumnName="quiz_ID" />
+                <ScalarProperty Name="course_ID" ColumnName="course_ID" />
+                <ScalarProperty Name="quiz_duration" ColumnName="quiz_duration" />
+                <ScalarProperty Name="no_of_questions" ColumnName="no_of_questions" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="students">
+            <EntityTypeMapping TypeName="elearningModel.student">
+              <MappingFragment StoreEntitySet="student">
+                <ScalarProperty Name="studentID" ColumnName="studentID" />
+                <ScalarProperty Name="studentEmail" ColumnName="studentEmail" />
+                <ScalarProperty Name="studentName" ColumnName="studentName" />
+                <ScalarProperty Name="studentPass" ColumnName="studentPass" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="answers">
+            <EntityTypeMapping TypeName="elearningModel.answer">
+              <MappingFragment StoreEntitySet="answer">
+                <ScalarProperty Name="answer_ID" ColumnName="answer_ID" />
+                <ScalarProperty Name="question_ID" ColumnName="question_ID" />
+                <ScalarProperty Name="answer1" ColumnName="answer" />
+                <ScalarProperty Name="option_a" ColumnName="option_a" />
+                <ScalarProperty Name="option_b" ColumnName="option_b" />
+                <ScalarProperty Name="option_c" ColumnName="option_c" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

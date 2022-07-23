@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="5b9667f7975f4ecd98bf6047963fcc0e" Name="Diagram1">
+        <EntityTypeShape EntityType="elearningModel.attempt" Width="1.5" PointX="7.5" PointY="13.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="elearningModel.cours" Width="1.5" PointX="3" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="elearningModel.enroll" Width="1.5" PointX="5.25" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="elearningModel.feedback" Width="1.5" PointX="5.25" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="elearningModel.instructor" Width="1.5" PointX="0.75" PointY="6.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="elearningModel.lesson" Width="1.5" PointX="5.25" PointY="7.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="elearningModel.question" Width="1.5" PointX="7.5" PointY="9.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="elearningModel.quiz" Width="1.5" PointX="5.25" PointY="13.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="elearningModel.student" Width="1.5" PointX="3" PointY="1.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="elearningModel.answer" Width="1.5" PointX="9.75" PointY="9.375" IsExpanded="true" />
+        <AssociationConnector Association="elearningModel.FK__attempts__quiz_I__286302EC" ManuallyRouted="false" />
+        <AssociationConnector Association="elearningModel.FK__attempts__studen__276EDEB3" ManuallyRouted="false" />
+        <AssociationConnector Association="elearningModel.FK__courses__instruc__08EA5793" ManuallyRouted="false" />
+        <AssociationConnector Association="elearningModel.FK__enroll__course_I__0DAF0CB0" ManuallyRouted="false" />
+        <AssociationConnector Association="elearningModel.FK__lessons__course___182C9B23" ManuallyRouted="false" />
+        <AssociationConnector Association="elearningModel.FK__question__course__21B6055D" ManuallyRouted="false" />
+        <AssociationConnector Association="elearningModel.FK__quiz__course_ID__1CF15040" ManuallyRouted="false" />
+        <AssociationConnector Association="elearningModel.FK__enroll__student___0EA330E9" ManuallyRouted="false" />
+        <AssociationConnector Association="elearningModel.FK__feedback__studen__1367E606" ManuallyRouted="false" />
+        <AssociationConnector Association="elearningModel.FK__answer__question__2A4B4B5E" ManuallyRouted="false" />
+        <AssociationConnector Association="elearningModel.FK__question__quiz_I__22AA2996" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
