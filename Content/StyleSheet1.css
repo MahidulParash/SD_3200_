@@ -19,7 +19,7 @@
     padding-top: 100px;
 }
 .padTopS{
-    padding-top: 40px;
+    padding-top: 50%;
 }
 .cardDiv {
     display: grid;
@@ -56,4 +56,9 @@
 .button{
     width: 50%;
     height: auto;
+}
+.logbuttonDiv {
+    display:block;
+    width: 50px;
+    background: red;
 }

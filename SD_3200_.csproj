@@ -244,6 +244,7 @@
     <Content Include="Views\Shared\generalLayout.cshtml" />
     <Content Include="Views\Shared\loginLayout.cshtml" />
     <Content Include="Views\Home\LoginPage.cshtml" />
+    <Content Include="Views\Home\RegisterPage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
