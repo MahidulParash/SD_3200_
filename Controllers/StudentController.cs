@@ -1,12 +1,7 @@
-﻿
-using SD_3200_.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using SD_3200_.Models;
 using System.Web.Mvc;
 
-namespace CSE3200.Controllers
+namespace SD_3200.Controllers
 {
     public class StudentController : Controller
     {
@@ -31,7 +26,7 @@ namespace CSE3200.Controllers
             }
             return View();
         }
-        
+
     }
-      
+
 }
