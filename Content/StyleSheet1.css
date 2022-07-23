@@ -4,16 +4,27 @@
     margin: 0px;
 }
 .heroDiv {
-    
+    background-image: url("Images/bg_img.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    min-height: 80vh;
 }
 .textDiv{
     padding: 150px 0px 0px 50px;
 }
-.cardDiv{
+.logTextDiv {
+    padding-top 200px;
+}
+.padTop {
+    padding-top: 100px;
+}
+.padTopS{
+    padding-top: 40px;
+}
+.cardDiv {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     gap: 0px 10px;
-
 }
 @media only screen and (max-width: 700px){
     .cardDiv {
@@ -37,4 +48,12 @@
 .stats{
     padding-left: 200px;
     margin-bottom 100px;
+}
+.align-center{
+    width: max-content;
+    margin: auto;
+}
+.button{
+    width: 50%;
+    height: auto;
 }

@@ -12,26 +12,24 @@ namespace SD_3200_.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class student
+    public partial class quiz
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public student()
+        public quiz()
         {
             this.attempts = new HashSet<attempt>();
-            this.enrolls = new HashSet<enroll>();
-            this.feedbacks = new HashSet<feedback>();
+            this.questions = new HashSet<question>();
         }
     
-        public int studentID { get; set; }
-        public string studentEmail { get; set; }
-        public string studentName { get; set; }
-        public string studentPass { get; set; }
+        public int quiz_ID { get; set; }
+        public Nullable<int> course_ID { get; set; }
+        public Nullable<int> quiz_duration { get; set; }
+        public Nullable<int> no_of_questions { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<attempt> attempts { get; set; }
+        public virtual cours cours { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<enroll> enrolls { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<feedback> feedbacks { get; set; }
+        public virtual ICollection<question> questions { get; set; }
     }
 }
