@@ -1,4 +1,6 @@
-﻿@{
+﻿@model SD_3200_.Models.student
+
+@{
     Layout = "~/Views/Shared/generalLayout.cshtml";
 }
 <head>
@@ -6,14 +8,15 @@
 </head>
 
 <div>
-    <div class="logTextDiv">
-        <h1 class="text-center">Welcome, Login in Here</h1>
+    <div class="logTextDiv my-4">
+        <h1 class="text-center">Welcome, Login Here</h1>
     </div>
     <div>
-        <h4 class="text-center">If You don't have an Account yet, <a href="#">Register</a> </h4>
+        <h4 class="text-center">If You don't have an Account yet, <a href="/Home/RegisterPage">Register</a> </h4>
     </div>
     <div class="align-items-center align-content-center">
-        <form class="align-center">
+   
+            <form class="align-center" action="">
                 <div class="form-group">
                     <label for="exampleInputEmail1" class="form-label mt-4">Email address</label>
                     <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
@@ -23,11 +26,13 @@
                     <label for="exampleInputPassword1" class="form-label mt-4">Password</label>
                     <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
                 </div>
-        </form>
-        <div>
-            <p><a href="#" class="btn btn-primary btn-lg btn-block">Login</a></p>
+
+            </form>
+       
+
+
+        <div class="textCenter my-4">
+            <a href="#" class="btn btn-primary btn-lg">Login</a>
         </div>
-        
     </div>
-    
 </div>

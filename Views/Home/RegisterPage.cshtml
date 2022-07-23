@@ -1,0 +1,40 @@
+﻿@{
+    Layout = "~/Views/Shared/generalLayout.cshtml";
+}
+<head>
+    <link href="~/Content/StyleSheet1.css" rel="stylesheet" />
+</head>
+
+<div>
+    <div class="logTextDiv my-4">
+        <h1 class="text-center">Welcome, Register to Our Website Here</h1>
+    </div>
+    <div>
+        <h4 class="text-center">If You already have an Account, <a href="/Home/LoginPage">Login</a> </h4>
+    </div>
+    <div class="align-items-center align-content-center">
+        <form class="align-center">
+            <div class="form-group">
+                <label for="exampleInputEmail1" class="form-label mt-4">Name</label>
+                <input type="text" class="form-control" id="exampleInputText" aria-describedby="textHelp" placeholder="Enter name">
+            </div>
+            <div class="form-group">
+                <label for="exampleInputEmail1" class="form-label mt-4">Email address</label>
+                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+                <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+            </div>
+            <div class="form-group">
+                <label for="exampleInputPassword1" class="form-label mt-4">Password</label>
+                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+            </div>
+            <div class="form-group">
+                <label for="exampleInputPassword1" class="form-label mt-4">Confirm Password</label>
+                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Confirm Password">
+            </div>
+
+        </form>
+        <div class="textCenter my-4">
+            <a href="#" class="btn btn-primary btn-lg">Register</a>
+        </div>
+    </div>
+</div>
