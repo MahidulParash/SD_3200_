@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SD_3200_.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,6 +9,7 @@ namespace SD_3200_.Controllers
 {
     public class HomeController : Controller
     {
+        elearningEntities1 db = new elearningEntities1();
         public ActionResult Index()
         {
             return View();
@@ -52,6 +54,19 @@ namespace SD_3200_.Controllers
         {
             return View();
         }
-        
+
+        [HttpPost]
+        public ActionResult CreateUser([Bind(Include = "studentName, studentEmail, studentPass")] student student)
+        {
+            if (ModelState.IsValid)
+            {
+                db.students.Add(student);
+                db.SaveChanges();
+                return View();
+
+            }
+            return View();
+        }
+
     }
 }
