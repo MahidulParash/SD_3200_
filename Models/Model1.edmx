@@ -553,7 +553,7 @@ warning 6002: The table/view 'elearning.dbo.answer' does not have a primary key 
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="elearningEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="elearningEntities1" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="attempts" EntityType="Self.attempt" />
           <EntitySet Name="courses" EntityType="Self.cours" />
           <EntitySet Name="enrolls" EntityType="Self.enroll" />
@@ -614,7 +614,7 @@ warning 6002: The table/view 'elearning.dbo.answer' does not have a primary key 
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="elearningModelStoreContainer" CdmEntityContainer="elearningEntities">
+        <EntityContainerMapping StorageEntityContainer="elearningModelStoreContainer" CdmEntityContainer="elearningEntities1">
           <EntitySetMapping Name="attempts">
             <EntityTypeMapping TypeName="elearningModel.attempt">
               <MappingFragment StoreEntitySet="attempts">
