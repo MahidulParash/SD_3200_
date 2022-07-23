@@ -52,14 +52,6 @@ namespace SD_3200_.Controllers
         {
             return View();
         }
-        public ActionResult Authorize(string studentEmail, string password)
-        {
-            if (studentEmail is null)
-            {
-                throw new ArgumentNullException(nameof(studentEmail));
-            }
-
-            return View();
-        }
+        
     }
 }
