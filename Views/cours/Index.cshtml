@@ -1,0 +1,64 @@
+﻿@model IEnumerable<SD_3200_.Models.cours>
+
+@{
+    Layout = "~/Views/Shared/generalLayout.cshtml";
+}
+<head>
+    <link href="~/Content/StyleSheet1.css" rel="stylesheet" />
+    <link href="~/Content/Site.css" rel="stylesheet" />
+</head>
+
+<div class="heroDiv" style=" text-align: center;">
+    <div class="textDiv">
+        <h1>Welcome to Courses</h1>
+        <p>Choose from 100+ online video courses with new additions published every month </p>
+        <p>Find courses that match your interest and get the perfect one for you</p>
+        <p><a href="#Courses" class="btn btn-primary btn-lg">Explore Now</a></p>
+    </div>
+</div>
+<!--<p>
+    @Html.ActionLink("Create New", "Create")
+</p>-->
+<div id="Courses" style="margin-top:100px;">
+        <!--<tr>
+        <th>
+            @Html.DisplayNameFor(model => model.course_name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.course_desc)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.course_image)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.course_duration)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.course_price)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.instructor.instructor_name)
+        </th>
+        <th></th>
+    </tr> -->
+        <div class="grid_">
+            @foreach (var item in Model)
+            {
+                <div class="card">
+                    <div class="image">
+                        <img src="~/Content/Images/@Html.DisplayFor(modelItem => item.course_image)" alt="Guitar" />
+                    </div>
+                    <div class="title textCenter">
+                        <h3>@Html.DisplayFor(modelItem => item.course_name)</h3>
+                    </div>
+                    <div class="description textCenter">
+                        <p>@Html.DisplayFor(modelItem => item.course_desc)</p>
+                    </div>
+                    <div class="button textCenter">
+                        <p><a href="/Home/LoginPage">Get Course</a></p>
+                    </div>
+                </div>
+            }
+        </div>
+</div>
+

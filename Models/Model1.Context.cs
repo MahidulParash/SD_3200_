@@ -13,10 +13,10 @@ namespace SD_3200_.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class elearningEntities1 : DbContext
+    public partial class elearningEntities2 : DbContext
     {
-        public elearningEntities1()
-            : base("name=elearningEntities1")
+        public elearningEntities2()
+            : base("name=elearningEntities2")
         {
         }
     

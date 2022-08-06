@@ -11,7 +11,7 @@ namespace SD_3200_.Models
 {
     using System;
     using System.Collections.Generic;
-    
+
     public partial class cours
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]

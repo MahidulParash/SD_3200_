@@ -10,7 +10,7 @@ namespace SD_3200.Controllers
 {
     public class StudentController : Controller
     {
-        elearningEntities1 db = new elearningEntities1();
+        elearningEntities2 db = new elearningEntities2();
         //adds a new user to the database
         //validation Handling
         

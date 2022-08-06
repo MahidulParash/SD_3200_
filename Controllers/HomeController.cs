@@ -9,7 +9,7 @@ namespace SD_3200_.Controllers
 {
     public class HomeController : Controller
     {
-        elearningEntities1 db = new elearningEntities1();
+        elearningEntities2 db = new elearningEntities2();
         public ActionResult Index()
         {
             return View();
@@ -56,7 +56,7 @@ namespace SD_3200_.Controllers
         }
 
         [HttpPost]
-        public ActionResult CreateUser([Bind(Include = "studentName, studentEmail, studentPass")] student student)
+        public ActionResult RegisterPage([Bind(Include = "studentName, studentEmail, studentPass")] student student)
         {
             if (ModelState.IsValid)
             {
