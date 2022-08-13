@@ -13,10 +13,10 @@ namespace SD_3200_.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class elearningEntities2 : DbContext
+    public partial class elearningEntities4 : DbContext
     {
-        public elearningEntities2()
-            : base("name=elearningEntities2")
+        public elearningEntities4()
+            : base("name=elearningEntities4")
         {
         }
     
@@ -34,6 +34,7 @@ namespace SD_3200_.Models
         public virtual DbSet<question> questions { get; set; }
         public virtual DbSet<quiz> quizs { get; set; }
         public virtual DbSet<student> students { get; set; }
+        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<answer> answers { get; set; }
     }
 }

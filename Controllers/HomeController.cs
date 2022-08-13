@@ -9,7 +9,7 @@ namespace SD_3200_.Controllers
 {
     public class HomeController : Controller
     {
-        elearningEntities2 db = new elearningEntities2();
+        elearningEntities4 db = new elearningEntities4();
         public ActionResult Index()
         {
             return View();
@@ -45,27 +45,69 @@ namespace SD_3200_.Controllers
             return View();
         }
 
-        public ActionResult LoginPage()
+        
+        [HttpGet]
+        public ActionResult RegisterPage(int id=0)
         {
-            return View();
+            student studentModel = new student();
+            return View(studentModel);
         }
 
-        public ActionResult RegisterPage()
+       [HttpPost]
+        public ActionResult RegisterPage(student student)
         {
-            return View();
-        }
-
-        [HttpPost]
-        public ActionResult RegisterPage([Bind(Include = "studentName, studentEmail, studentPass")] student student)
-        {
-            if (ModelState.IsValid)
+            using (elearningEntities4 db = new elearningEntities4())
             {
+                if(db.students.Any(x => x.studentEmail==student.studentEmail))
+                {
+                    ViewBag.DuplicateMessage = "Username already exists";
+                    return View("RegisterPage", student);
+                }
                 db.students.Add(student);
                 db.SaveChanges();
-                return View();
+                //return View();
+
+            }
+            ModelState.Clear();
+            ViewBag.SuccessMessage = "Registration Successful";
+            return View("RegisterPage",new student());
+        }
+        [HttpGet]
+        public ActionResult LoginPage()
+        {
+            student studentmodel = new student();
+            return View(studentmodel);
+        }
+        [HttpPost]
+        public ActionResult LoginPage(string loginEmail, string loginPassword)
+        {
+            using (elearningEntities4 db = new elearningEntities4())
+            {
+                var studentDetails = db.students.Where(x => x.studentEmail == loginEmail && x.studentPass == loginPassword).FirstOrDefault();
+                if (studentDetails != null)
+                {
+                    Session["userEmail"] = studentDetails.studentEmail;
+                    Session["userName"] = studentDetails.studentName;
+                    return RedirectToAction("studentDashboard", "login");
+                }
+                else
+                {
+                    ViewBag.loginError = "Login unsuccessful";
+                }
 
             }
             return View();
+        }
+        public ActionResult UserDashBoard()
+        {
+            if (Session["UserID"] != null)
+            {
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("Login");
+            }
         }
 
     }

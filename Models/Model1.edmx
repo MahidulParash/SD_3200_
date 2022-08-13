@@ -102,6 +102,16 @@ warning 6002: The table/view 'elearning.dbo.answer' does not have a primary key 
           <Property Name="studentName" Type="varchar" MaxLength="50" />
           <Property Name="studentPass" Type="varchar" MaxLength="50" />
         </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
         <Association Name="FK__answer__question__2A4B4B5E">
           <End Role="question" Type="Self.question" Multiplicity="0..1" />
           <End Role="answer" Type="Self.answer" Multiplicity="*" />
@@ -244,6 +254,7 @@ warning 6002: The table/view 'elearning.dbo.answer' does not have a primary key 
           <EntitySet Name="question" EntityType="Self.question" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="quiz" EntityType="Self.quiz" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="student" EntityType="Self.student" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="answer" EntityType="Self.answer" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [answer].[answer_ID] AS [answer_ID], 
@@ -409,6 +420,16 @@ warning 6002: The table/view 'elearning.dbo.answer' does not have a primary key 
           <NavigationProperty Name="enrolls" Relationship="Self.FK__enroll__student___0EA330E9" FromRole="student" ToRole="enroll" />
           <NavigationProperty Name="feedbacks" Relationship="Self.FK__feedback__studen__1367E606" FromRole="student" ToRole="feedback" />
         </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
         <EntityType Name="answer">
           <Key>
             <PropertyRef Name="answer_ID" />
@@ -553,7 +574,7 @@ warning 6002: The table/view 'elearning.dbo.answer' does not have a primary key 
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="elearningEntities2" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="elearningEntities4" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="attempts" EntityType="Self.attempt" />
           <EntitySet Name="courses" EntityType="Self.cours" />
           <EntitySet Name="enrolls" EntityType="Self.enroll" />
@@ -563,6 +584,7 @@ warning 6002: The table/view 'elearning.dbo.answer' does not have a primary key 
           <EntitySet Name="questions" EntityType="Self.question" />
           <EntitySet Name="quizs" EntityType="Self.quiz" />
           <EntitySet Name="students" EntityType="Self.student" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
           <EntitySet Name="answers" EntityType="Self.answer" />
           <AssociationSet Name="FK__attempts__quiz_I__286302EC" Association="Self.FK__attempts__quiz_I__286302EC">
             <End Role="quiz" EntitySet="quizs" />
@@ -614,7 +636,7 @@ warning 6002: The table/view 'elearning.dbo.answer' does not have a primary key 
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="elearningModelStoreContainer" CdmEntityContainer="elearningEntities2">
+        <EntityContainerMapping StorageEntityContainer="elearningModelStoreContainer" CdmEntityContainer="elearningEntities4">
           <EntitySetMapping Name="attempts">
             <EntityTypeMapping TypeName="elearningModel.attempt">
               <MappingFragment StoreEntitySet="attempts">
@@ -705,6 +727,17 @@ warning 6002: The table/view 'elearning.dbo.answer' does not have a primary key 
                 <ScalarProperty Name="studentEmail" ColumnName="studentEmail" />
                 <ScalarProperty Name="studentName" ColumnName="studentName" />
                 <ScalarProperty Name="studentPass" ColumnName="studentPass" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="elearningModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

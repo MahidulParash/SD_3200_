@@ -12,7 +12,7 @@ namespace SD_3200_.Controllers
 {
     public class coursController : Controller
     {
-        private elearningEntities2 db = new elearningEntities2();
+        private elearningEntities4 db = new elearningEntities4();
 
         // GET: cours
         public ActionResult Index()

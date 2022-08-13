@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="e92140a10ccf4a29875c3726b0f29edf" Name="Diagram1">
+      <Diagram DiagramId="3cb0fffea4914b35927ecc13d250e43e" Name="Diagram1">
         <EntityTypeShape EntityType="elearningModel.attempt" Width="1.5" PointX="7.5" PointY="13.5" IsExpanded="true" />
         <EntityTypeShape EntityType="elearningModel.cours" Width="1.5" PointX="3" PointY="5.375" IsExpanded="true" />
         <EntityTypeShape EntityType="elearningModel.enroll" Width="1.5" PointX="5.25" PointY="4" IsExpanded="true" />
@@ -14,6 +14,7 @@
         <EntityTypeShape EntityType="elearningModel.question" Width="1.5" PointX="7.5" PointY="9.375" IsExpanded="true" />
         <EntityTypeShape EntityType="elearningModel.quiz" Width="1.5" PointX="5.25" PointY="13.375" IsExpanded="true" />
         <EntityTypeShape EntityType="elearningModel.student" Width="1.5" PointX="3" PointY="1.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="elearningModel.sysdiagram" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="elearningModel.answer" Width="1.5" PointX="9.75" PointY="9.375" IsExpanded="true" />
         <AssociationConnector Association="elearningModel.FK__attempts__quiz_I__286302EC" ManuallyRouted="false" />
         <AssociationConnector Association="elearningModel.FK__attempts__studen__276EDEB3" ManuallyRouted="false" />
