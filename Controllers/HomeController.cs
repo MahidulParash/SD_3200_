@@ -89,12 +89,14 @@ namespace SD_3200_.Controllers
                 {
                     Session["userEmail"] = instructorDetails.instructor_email;
                     Session["userName"] = instructorDetails.instructor_password;
+                    Session["userID"] = instructorDetails.instructor_ID;
                     return RedirectToAction("instructorDashboard", "Admin");
                 }
                 else if (studentDetails != null)
                 {
                     Session["userEmail"] = studentDetails.studentEmail;
                     Session["userName"] = studentDetails.studentName;
+                    Session["userID"] = studentDetails.studentID;
                     return RedirectToAction("studentDashboard", "login");
                 }
                 else

@@ -52,9 +52,7 @@
             @foreach (var item in Model)
             {
                 <div class="card">
-                    <div class="image">
-                        <img src="~/Content/Images/@Html.DisplayFor(modelItem => item.course_image)" alt="Guitar" />
-                    </div>
+                    
                     <div class="title textCenter">
                         <h3>@Html.DisplayFor(modelItem => item.course_name)</h3>
                     </div>

@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="elearningModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="elearningModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <!--Errors Found During Generation:
 warning 6002: The table/view 'elearning.dbo.answer' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="answer">
@@ -47,6 +47,8 @@ warning 6002: The table/view 'elearning.dbo.answer' does not have a primary key 
           <Property Name="course_ID" Type="int" />
           <Property Name="student_ID" Type="int" />
           <Property Name="enroll_date" Type="date" />
+          <Property Name="paymentStatus" Type="varchar" MaxLength="255" />
+          <Property Name="transactionID" Type="varchar" MaxLength="255" />
         </EntityType>
         <EntityType Name="feedback">
           <Key>
@@ -310,8 +312,7 @@ warning 6002: The table/view 'elearning.dbo.answer' does not have a primary key 
             <End Role="quiz" EntitySet="quiz" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="elearningModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -353,6 +354,8 @@ warning 6002: The table/view 'elearning.dbo.answer' does not have a primary key 
           <Property Name="enroll_date" Type="DateTime" Precision="0" />
           <NavigationProperty Name="cours" Relationship="Self.FK__enroll__course_I__0DAF0CB0" FromRole="enroll" ToRole="courses" />
           <NavigationProperty Name="student" Relationship="Self.FK__enroll__student___0EA330E9" FromRole="enroll" ToRole="student" />
+          <Property Name="paymentStatus" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="transactionID" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="feedback">
           <Key>
@@ -663,6 +666,8 @@ warning 6002: The table/view 'elearning.dbo.answer' does not have a primary key 
           <EntitySetMapping Name="enrolls">
             <EntityTypeMapping TypeName="elearningModel.enroll">
               <MappingFragment StoreEntitySet="enroll">
+                <ScalarProperty Name="transactionID" ColumnName="transactionID" />
+                <ScalarProperty Name="paymentStatus" ColumnName="paymentStatus" />
                 <ScalarProperty Name="enroll_ID" ColumnName="enroll_ID" />
                 <ScalarProperty Name="course_ID" ColumnName="course_ID" />
                 <ScalarProperty Name="student_ID" ColumnName="student_ID" />
