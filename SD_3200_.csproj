@@ -128,6 +128,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\coursController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\loginController.cs" />
@@ -260,6 +261,8 @@
     <Content Include="Views\Home\RegisterPage.cshtml" />
     <Content Include="Views\Login\studentDashboard.cshtml" />
     <Content Include="Views\Shared\adminLoginLayout.cshtml" />
+    <Content Include="Views\Login\studentProfile.cshtml" />
+    <Content Include="Views\Admin\instructorDashboard.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,0 +1,12 @@
+﻿
+@{
+    ViewBag.Title = "studentProfile";
+    Layout = "~/Views/Shared/loginLayout.cshtml";
+    if (Session["userEmail"] == null)
+    {
+        Response.Redirect("~/Home/LoginPage");
+    }
+}
+
+<h2>studentProfile</h2>
+

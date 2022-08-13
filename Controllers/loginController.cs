@@ -13,6 +13,18 @@ namespace SD_3200_.Controllers
         {
             return View();
         }
+        public ActionResult studentProfile()
+        {
+            return View();
+        }
+        
+        public ActionResult logout()
+        {
+            Session.Abandon();
+            Session["userEmail"] = null;
+        
+            return RedirectToAction("HomePage", "Home");
+        }
         public ActionResult adminDashboard()
         {
             return View();

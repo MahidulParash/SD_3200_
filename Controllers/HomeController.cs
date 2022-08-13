@@ -84,7 +84,14 @@ namespace SD_3200_.Controllers
             using (elearningEntities4 db = new elearningEntities4())
             {
                 var studentDetails = db.students.Where(x => x.studentEmail == loginEmail && x.studentPass == loginPassword).FirstOrDefault();
-                if (studentDetails != null)
+                var instructorDetails = db.instructors.Where(x => x.instructor_email == loginEmail && x.instructor_password == loginPassword).FirstOrDefault();
+                if(instructorDetails!=null)
+                {
+                    Session["userEmail"] = instructorDetails.instructor_email;
+                    Session["userName"] = instructorDetails.instructor_password;
+                    return RedirectToAction("instructorDashboard", "Admin");
+                }
+                else if (studentDetails != null)
                 {
                     Session["userEmail"] = studentDetails.studentEmail;
                     Session["userName"] = studentDetails.studentName;

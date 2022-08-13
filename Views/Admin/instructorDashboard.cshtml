@@ -1,9 +1,16 @@
-﻿@{
-    ViewBag.Title = "studentDashboard";
-    Layout = "~/Views/Shared/loginLayout.cshtml";
+﻿
+@{
+    ViewBag.Title = "instructorDashboard";
+
+
     if (Session["userEmail"] == null)
     {
+        Layout = "~/Views/Shared/generalLayout.cshtml";
         Response.Redirect("~/Home/LoginPage");
+    }
+    else
+    {
+        Layout = "~/Views/Shared/adminLoginLayout.cshtml";
     }
 }
 <head>
@@ -14,5 +21,4 @@
         window.onunload = function () { null };
     </script>
 </head>
-<h2 align="center">Hello @Session["userName"]</h2>
-
+<h2>instructorDashboard</h2>
