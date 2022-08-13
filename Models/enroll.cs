@@ -18,7 +18,8 @@ namespace SD_3200_.Models
         public Nullable<int> course_ID { get; set; }
         public Nullable<int> student_ID { get; set; }
         public Nullable<System.DateTime> enroll_date { get; set; }
-    
+        public string paymentStatus { get; set; }
+
         public virtual cours cours { get; set; }
         public virtual student student { get; set; }
     }
