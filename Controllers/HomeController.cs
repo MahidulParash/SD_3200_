@@ -88,8 +88,9 @@ namespace SD_3200_.Controllers
                 if(instructorDetails!=null)
                 {
                     Session["userEmail"] = instructorDetails.instructor_email;
-                    Session["userName"] = instructorDetails.instructor_password;
+                    Session["userName"] = instructorDetails.instructor_name;
                     Session["userID"] = instructorDetails.instructor_ID;
+                    Session["userRole"] = "instuctor";
                     return RedirectToAction("instructorDashboard", "Admin");
                 }
                 else if (studentDetails != null)
@@ -97,6 +98,7 @@ namespace SD_3200_.Controllers
                     Session["userEmail"] = studentDetails.studentEmail;
                     Session["userName"] = studentDetails.studentName;
                     Session["userID"] = studentDetails.studentID;
+                    Session["userRole"] = "student";
                     return RedirectToAction("studentDashboard", "login");
                 }
                 else

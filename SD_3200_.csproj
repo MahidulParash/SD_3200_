@@ -263,6 +263,7 @@
     <Content Include="Views\Shared\adminLoginLayout.cshtml" />
     <Content Include="Views\Login\studentProfile.cshtml" />
     <Content Include="Views\Admin\instructorDashboard.cshtml" />
+    <Content Include="Views\Admin\approveCourse.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
