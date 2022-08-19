@@ -29,6 +29,18 @@ namespace SD_3200_.Controllers
             }
             
         }
+        public ActionResult SelectedCourse(int id)
+        {
+            ViewBag.id = id;
+            var lessons = db.lessons.Where(c => c.course_ID == id);
+            return View(lessons.ToList());
+        }
+        public ActionResult WatchVideo(int id)
+        {
+            ViewBag.id = id;
+            var lessons = db.lessons.Where(c => c.course_ID == id);
+            return View();
+        }
         public ActionResult studentProfile()
         {
             return View();
@@ -41,9 +53,6 @@ namespace SD_3200_.Controllers
         
             return RedirectToAction("HomePage", "Home");
         }
-        public ActionResult adminDashboard()
-        {
-            return View();
-        }
+        
     }
 }

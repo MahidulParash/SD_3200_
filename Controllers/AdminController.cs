@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using System.Data.Entity;
 using SD_3200_.Models;
 using System.Net;
+using System.Data.SqlClient;
 
 namespace SD_3200_.Controllers
 {
@@ -22,11 +23,23 @@ namespace SD_3200_.Controllers
             return View();
         }
         public ActionResult approveCourse()
-        {
-            
+        {   
             string str = "unpaid";
             var courses = db.enrolls.Where(c => c.paymentStatus == str);
             return View(courses.ToList());
+        }
+        public ActionResult approve(string Approved)
+        {
+            int id = Convert.ToInt32(Approved);
+            SqlConnection con = new SqlConnection(@"Data Source=LAPTOP-AIC623KV\SQLEXPRESS;Initial Catalog=elearning; Integrated Security=True");
+            SqlCommand sql;
+            con.Open();
+
+            
+            sql = new SqlCommand("UPDATE enroll SET paymentStatus = 'paid' WHERE enroll_ID = "+id+";",con);
+            sql.ExecuteNonQuery();
+            con.Close();
+            return RedirectToAction("approveCourse");
         }
     }
 }
