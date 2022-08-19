@@ -58,7 +58,8 @@ namespace SD_3200_.Controllers
         {
             using (elearningEntities4 db = new elearningEntities4())
             {
-                if(db.students.Any(x => x.studentEmail==student.studentEmail))
+              
+                if (db.students.Any(x => x.studentEmail==student.studentEmail))
                 {
                     ViewBag.DuplicateMessage = "Username already exists";
                     return View("RegisterPage", student);
