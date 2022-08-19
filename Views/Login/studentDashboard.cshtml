@@ -29,7 +29,7 @@
 
                 <div class="card-body" align="center">
                     
-                        <li class="notiContentLi" onclick="location.href ='/Home/HomePage'"> @item.cours.course_name</li>                    
+                        <li class="notiContentLi" onclick="location.href = '@(Url.Action("SelectedCourse", "login",new { id = item.course_ID}))'"> @item.cours.course_name</li>                    
                 </div>
                
 

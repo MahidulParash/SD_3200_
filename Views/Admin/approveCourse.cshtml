@@ -18,13 +18,17 @@
         <div class="card-body">
 
             <h2> @item.cours.course_name</h2>
-        
+
             <p><b>Transaction ID: </b>@item.transactionID</p>
             <p><b>Course Price: </b>@item.cours.course_price</p>
-            <input class="form-check-input" name="chk" type="checkbox" value="false" id="flexCheckDefault" align="right">
+            @using (Html.BeginForm("approve", "Admin"))
+            {
+                <button type="submit" name="Approved" value="@item.enroll_ID">Approve</button>
+                
+            }
+
         </div>
-
-
     </div>
 }
+
 

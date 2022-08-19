@@ -265,7 +265,8 @@
     <Content Include="Views\Login\studentProfile.cshtml" />
     <Content Include="Views\Admin\instructorDashboard.cshtml" />
     <Content Include="Views\Admin\approveCourse.cshtml" />
-    <Content Include="Views\cours\AdminCourses.cshtml" />
+    <Content Include="Views\Login\SelectedCourse.cshtml" />
+    <Content Include="Views\Login\WatchVideo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

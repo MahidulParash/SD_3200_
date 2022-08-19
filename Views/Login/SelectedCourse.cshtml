@@ -1,0 +1,25 @@
+﻿@model IEnumerable<SD_3200_.Models.lesson>
+@{
+    ViewBag.Title = "SelectedCourse";
+    Layout = "~/Views/Shared/loginLayout.cshtml";
+    if (Session["userEmail"] == null)
+    {
+        Response.Redirect("~/Home/LoginPage");
+    }
+}
+
+
+
+@foreach (var item in Model)
+{
+    <div class="card" style="margin-top:50px">
+
+        <div class="card-body" align="center">
+
+            <li class="notiContentLi" onclick="location.href = '@(Url.Action("WatchVideo", "login",new { id = item.lesson_ID}))'">  @item.lesson_name</li>
+        </div>
+
+
+    </div>
+}
+
