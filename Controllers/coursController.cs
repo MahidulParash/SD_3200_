@@ -21,6 +21,7 @@ namespace SD_3200_.Controllers
             return View(courses.ToList());
         }
 
+
         // GET: cours/Details/5
         public ActionResult Details(int? id)
         {

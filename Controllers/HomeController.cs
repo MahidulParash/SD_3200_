@@ -63,7 +63,6 @@ namespace SD_3200_.Controllers
                 db.students.Add(student);
                 db.SaveChanges();
                 return View();
-
             }
             return View();
         }
