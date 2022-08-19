@@ -54,7 +54,7 @@
                 <div class="card hoverLink">
                     <a href="/Home/LoginPage" style="text-decoration: none; color: black;">
                         <div class="image">
-                            <img src="~/Content/Images/@Html.DisplayFor(modelItem => item.course_image)" alt="Guitar" />
+                            <img src="~/Content/Images/@Html.DisplayFor(modelItem => item.course_image)" alt="No image" />
                         </div>
                         <div class="title textCenter">
                             <h3>@Html.DisplayFor(modelItem => item.course_name)</h3>
@@ -63,7 +63,7 @@
                             <p>@Html.DisplayFor(modelItem => item.course_desc)</p>
                         </div>
                         <div class="button textCenter">
-                            <p><a href="/Home/LoginPage">Get Course</a></p>
+                            <p><a href='@{Url.Action("Delete", "cours", new{id=item.course_ID});}'>Edit/Delete Course</a></p>
                         </div>
                         
                     </a>
@@ -71,4 +71,3 @@
             }
         </div>
 </div>
-

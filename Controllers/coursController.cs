@@ -21,6 +21,12 @@ namespace SD_3200_.Controllers
             return View(courses.ToList());
         }
 
+        public ActionResult AdminCourses()
+        {
+            var courses = db.courses.Include(c => c.instructor);
+            return View(courses.ToList());
+        }
+
 
         // GET: cours/Details/5
         public ActionResult Details(int? id)
