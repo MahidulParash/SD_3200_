@@ -1,0 +1,30 @@
+﻿@model IEnumerable<SD_3200_.Models.enroll>
+@{
+    ViewBag.Title = "approveCourse";
+    if (Session["userEmail"] == null)
+    {
+        Layout = "~/Views/Shared/generalLayout.cshtml";
+        Response.Redirect("~/Home/LoginPage");
+    }
+    else
+    {
+        Layout = "~/Views/Shared/adminLoginLayout.cshtml";
+    }
+}
+@foreach (var item in Model)
+{
+    <div class="card" style="margin-top:50px">
+
+        <div class="card-body">
+
+            <h2> @item.cours.course_name</h2>
+        
+            <p><b>Transaction ID: </b>@item.transactionID</p>
+            <p><b>Course Price: </b>@item.cours.course_price</p>
+            <input class="form-check-input" name="chk" type="checkbox" value="false" id="flexCheckDefault" align="right">
+        </div>
+
+
+    </div>
+}
+

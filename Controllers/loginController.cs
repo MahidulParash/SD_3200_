@@ -19,8 +19,14 @@ namespace SD_3200_.Controllers
             int i = Convert.ToInt32(Session["userID"]);
             string str = "paid";
             var courses = db.enrolls.Where(c=>c.student_ID==i&&c.paymentStatus==str);
-            
-            return View(courses.ToList());
+            if (Session["userRole"] == "student")
+            {
+                return View(courses.ToList());
+            }
+            else
+            {
+                return RedirectToAction("instructorDashboard", "Admin");
+            }
             
         }
         public ActionResult studentProfile()

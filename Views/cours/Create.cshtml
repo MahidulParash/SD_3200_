@@ -12,6 +12,15 @@
 }
 @{
     ViewBag.Title = "Create";
+    if (Session["userEmail"] == null)
+    {
+        Layout = "~/Views/Shared/generalLayout.cshtml";
+        Response.Redirect("~/Home/LoginPage");
+    }
+    else
+    {
+        Layout = "~/Views/Shared/adminLoginLayout.cshtml";
+    }
 }
 
 <h2>Create</h2>
