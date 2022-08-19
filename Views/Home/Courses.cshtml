@@ -1,6 +1,13 @@
 ﻿@{
     ViewBag.Title = "Courses";
-    Layout = "~/Views/Shared/generalLayout.cshtml";
+    if (Session["userEmail"] == null)
+    { Layout = "~/Views/Shared/generalLayout.cshtml";
+    }
+    else
+    {
+        Layout = "~/Views/Shared/loginLayout.cshtml";
+    }
+
 }
 
 <!DOCTYPE html>

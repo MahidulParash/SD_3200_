@@ -20,24 +20,23 @@
             <div class="collapse navbar-collapse" id="navbarColor01" margin="auto">
                 <ul class="navbar-nav me-auto">
                     <li class="nav-item">
-                        <a class="nav-link active" href="/Home/HomePage">
-                            Home
+                        <a class="nav-link active" href="/Admin/AdminCourseList">
+                            Courses
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/cours/Index">Courses</a>
+                        <a class="nav-link" href="/Admin/AdminStudents">Students</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/Home/ContactUs">Contact Us</a>
-                    </li>
+                   
                 </ul>
                 <div class="dropdown">
                     <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                        Dashboard
+                        Admin
                     </button>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                        <li><a class="dropdown-item" href="/login/studentProfile">My Profile</a>
-                        <li><a class="dropdown-item" href="/login/studentDashboard">My Courses</a>
+                        <li><a class="dropdown-item" href="/Admin/AdminProfile">My Profile</a>
+                        <li><a class="dropdown-item" href="/Admin/AddorEditCourse">Add/Edit Course</a>
+                        <li><a class="dropdown-item" href="/Admin/AddorRemoveStudent">Add/Remove Student</a>
                         <li><a class="dropdown-item" href="/login/logout">Logout</a></li>
 
                     </ul>
@@ -58,6 +57,6 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
-    
+
 </body>
 </html>

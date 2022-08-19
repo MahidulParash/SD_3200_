@@ -128,9 +128,10 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\coursController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\StudentController.cs" />
+    <Compile Include="Controllers\loginController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -146,6 +147,7 @@
     <Compile Include="Models\enroll.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Extended\student.cs" />
     <Compile Include="Models\feedback.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -177,6 +179,10 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\student.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\studentLogin.cs" />
+    <Compile Include="Models\sysdiagram.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -245,13 +251,18 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\generalLayout.cshtml" />
     <Content Include="Views\Shared\loginLayout.cshtml" />
-    <Content Include="Views\Home\RegisterPage.cshtml" />
     <Content Include="Views\Home\LoginPage.cshtml" />
     <Content Include="Views\cours\Create.cshtml" />
     <Content Include="Views\cours\Delete.cshtml" />
     <Content Include="Views\cours\Details.cshtml" />
     <Content Include="Views\cours\Edit.cshtml" />
     <Content Include="Views\cours\Index.cshtml" />
+    <Content Include="Views\Login\Dashboard.cshtml" />
+    <Content Include="Views\Home\RegisterPage.cshtml" />
+    <Content Include="Views\Login\studentDashboard.cshtml" />
+    <Content Include="Views\Shared\adminLoginLayout.cshtml" />
+    <Content Include="Views\Login\studentProfile.cshtml" />
+    <Content Include="Views\Admin\instructorDashboard.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

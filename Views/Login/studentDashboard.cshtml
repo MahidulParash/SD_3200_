@@ -1,0 +1,42 @@
+﻿@model IEnumerable<SD_3200_.Models.enroll>
+
+@{
+    ViewBag.Title = "studentDashboard";
+    Layout = "~/Views/Shared/loginLayout.cshtml";
+    if (Session["userEmail"] == null)
+    {
+        Response.Redirect("~/Home/LoginPage");
+    }
+}
+<head>
+    <link href="~/Content/StyleSheet1.css" rel="stylesheet" />
+
+
+
+    <script type="text/javascript">
+
+        function preventBack() { window.history.forward(); }
+        setTimeout("preventBack()", 0);
+        window.onunload = function () { null }
+
+    </script>
+    <h2 align="center">Hello @Session["userName"]!</h2>
+
+    
+        @foreach (var item in Model)
+        {
+            <div class="card" style="margin-top:50px">
+
+                <div class="card-body" align="center">
+                    
+                        <li class="notiContentLi" onclick="location.href ='/Home/HomePage'"> @item.cours.course_name</li>                    
+                </div>
+               
+
+            </div>
+        }
+  
+
+</head>
+
+

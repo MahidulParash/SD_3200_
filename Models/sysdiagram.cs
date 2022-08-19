@@ -12,16 +12,12 @@ namespace SD_3200_.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class enroll
+    public partial class sysdiagram
     {
-        public int enroll_ID { get; set; }
-        public Nullable<int> course_ID { get; set; }
-        public Nullable<int> student_ID { get; set; }
-        public Nullable<System.DateTime> enroll_date { get; set; }
-        public string paymentStatus { get; set; }
-        public string transactionID { get; set; }
-    
-        public virtual cours cours { get; set; }
-        public virtual student student { get; set; }
+        public string name { get; set; }
+        public int principal_id { get; set; }
+        public int diagram_id { get; set; }
+        public Nullable<int> version { get; set; }
+        public byte[] definition { get; set; }
     }
 }

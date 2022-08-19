@@ -1,8 +1,17 @@
-﻿@{
-    Layout = "~/Views/Shared/generalLayout.cshtml";
+﻿
+@{
+    if (Session["userEmail"] == null)
+    { Layout = "~/Views/Shared/generalLayout.cshtml"; }
+    else
+            {
+                Layout = "~/Views/Shared/loginLayout.cshtml";
+            }
+
 }
+
 <head>
     <link href="~/Content/StyleSheet1.css" rel="stylesheet" />
+    
 </head>
 <div>
     <div class="heroDiv">
@@ -71,4 +80,3 @@
         </div>
     </div>
 </div>
-

@@ -1,43 +1,73 @@
-﻿@{
+﻿@model SD_3200_.Models.student
+
+@{
+    ViewBag.Title = "RegisterPage";
     Layout = "~/Views/Shared/generalLayout.cshtml";
 }
-<head>
-    <link href="~/Content/StyleSheet1.css" rel="stylesheet" />
-</head>
 
-<div>
-    <div class="logTextDiv my-4">
-        <h1 class="text-center">Welcome, Register to Our Website Here</h1>
+<h2 align="center">Registration</h2>
+
+
+@using (Html.BeginForm("RegisterPage","Home",FormMethod.Post)) 
+{
+    @Html.AntiForgeryToken()
+    
+<div class="form-horizontal" align="center">
+
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-group">
+        @Html.LabelFor(model => model.studentEmail, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.studentEmail, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.studentEmail, "", new { @class = "text-danger" })
+        </div>
     </div>
-    <div>
-        <h4 class="text-center">If You already have an Account, <a href="/Home/LoginPage">Login</a> </h4>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.studentName, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.studentName, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.studentName, "", new { @class = "text-danger" })
+        </div>
     </div>
-    <div class="align-items-center align-content-center">
-        <form class="align-center" action="/Home/RegisterPage" method="post">
-            <div class="form-group">
-                <label for="exampleInputEmail1" class="form-label mt-4">Name</label>
-                <input type="text" class="form-control" id="exampleInputText" aria-describedby="textHelp" placeholder="Enter name" name="studentName">
-                @Html.ValidationMessage("studentName", "", new { @class = "text-danger" })
-            </div>
-            <div class="form-group">
-                <label for="exampleInputEmail1" class="form-label mt-4">Email address</label>
-                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" name="studentEmail">
-                @Html.ValidationMessage("studentEmail", "", new { @class = "text-danger" })
-                <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-            </div>
-            <div class="form-group">
-                <label for="exampleInputPassword1" class="form-label mt-4">Password</label>
-                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" name="studentPass">
-                @Html.ValidationMessage("studentPass", "", new { @class = "text-danger" })
-            </div>
-            <div class="form-group">
-                <label for="exampleInputPassword1" class="form-label mt-4">Confirm Password</label>
-                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Confirm Password">
-            </div>
-            <div class="textCenter my-4">
-                <button class="btn btn-success">Submit</button>
-            </div>
-        </form>
-       
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.studentPass, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.studentPass, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.studentPass, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.confirmPass, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.confirmPass, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.confirmPass, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Submit" class="btn btn-primary btn-lg" />
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-2">
+            <label class="label-success">@ViewBag.SuccessMessage</label>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-2">
+            <label class="label-danger">@ViewBag.DuplicateMessage</label>
+        </div>
     </div>
 </div>
+}
+
+ 
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
