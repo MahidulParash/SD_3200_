@@ -21,6 +21,7 @@ namespace SD_3200_.Controllers
             return View(courses.ToList());
         }
 
+
         // GET: cours/Details/5
         public ActionResult Details(int? id)
         {
@@ -54,7 +55,7 @@ namespace SD_3200_.Controllers
             {
                 db.courses.Add(cours);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("/Admin/instructorDashboard");
             }
 
             ViewBag.instructor_ID = new SelectList(db.instructors, "instructor_ID", "instructor_name", cours.instructor_ID);

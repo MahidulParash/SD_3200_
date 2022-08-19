@@ -7,7 +7,7 @@
     }
     else
     {
-        Layout = "~/Views/Shared/loginLayout.cshtml";
+        Layout = "~/Views/Shared/adminLoginLayout.cshtml";
     }
 }
 <head>
@@ -51,17 +51,21 @@
         <div class="grid_">
             @foreach (var item in Model)
             {
-                <div class="card">
-                    
-                    <div class="title textCenter">
-                        <h3>@Html.DisplayFor(modelItem => item.course_name)</h3>
-                    </div>
-                    <div class="description textCenter">
-                        <p>@Html.DisplayFor(modelItem => item.course_desc)</p>
-                    </div>
-                    <div class="button textCenter">
-                        <p><a href="/Home/LoginPage">Get Course</a></p>
-                    </div>
+                <div class="card hoverLink">
+                    <a href="/Home/LoginPage" style="text-decoration: none; color: black;">
+                        <div class="image">
+                            <img src="~/Content/Images/@Html.DisplayFor(modelItem => item.course_image)" alt="Guitar" />
+                        </div>
+                        <div class="title textCenter">
+                            <h3>@Html.DisplayFor(modelItem => item.course_name)</h3>
+                        </div>
+                        <div class="description textCenter">
+                            <p>@Html.DisplayFor(modelItem => item.course_desc)</p>
+                        </div>
+                        <div class="button textCenter">
+                            <p><a href="/Home/LoginPage">Get Course</a></p>
+                        </div>
+                    </a>
                 </div>
             }
         </div>

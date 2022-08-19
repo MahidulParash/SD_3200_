@@ -27,3 +27,7 @@ textarea {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
 }
+
+.hoverLink:hover{
+    color: blue;
+}
