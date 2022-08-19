@@ -38,7 +38,11 @@ namespace SD_3200_.Controllers
         public ActionResult WatchVideo(int id)
         {
             ViewBag.id = id;
-            var lessons = db.lessons.Where(c => c.course_ID == id);
+            
+            var lesson = db.lessons.Where(c => c.lesson_ID == id).FirstOrDefault();
+            ViewBag.link = Convert.ToString(lesson.lesson_link);
+            ViewBag.name= Convert.ToString(lesson.lesson_name);
+            ViewBag.desc = Convert.ToString(lesson.lesson_desc);
             return View();
         }
         public ActionResult studentProfile()
