@@ -29,20 +29,20 @@ namespace SD_3200_.Controllers
         }
 
 
-        // GET: cours/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            cours cours = db.courses.Find(id);
-            if (cours == null)
-            {
-                return HttpNotFound();
-            }
-            return View(cours);
-        }
+        //// GET: cours/Details/5
+        //public ActionResult Details(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //    }
+        //    cours cours = db.courses.Find(id);
+        //    if (cours == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+        //    return View(cours);
+        //}
 
         // GET: cours/Create
         public ActionResult Create()
@@ -157,11 +157,47 @@ namespace SD_3200_.Controllers
             base.Dispose(disposing);
         }
 
-        public ActionResult EditCourses(string coursedit)
+        public ActionResult Details(string coursedit)
         {
             var id = Convert.ToInt32(coursedit);
             var courses = db.courses.Where(c => c.course_ID == id);
             return View(courses.ToList());
+        }
+
+        public ActionResult Edit(string editCourse)
+        {
+            int id = Convert.ToInt32(editCourse);
+            var course = db.courses.Where(c => c.course_ID == id).FirstOrDefault();
+            ViewBag.course_ID = course.course_ID;
+            ViewBag.course_name = course.course_name;
+            ViewBag.course_desc = course.course_desc;
+            ViewBag.course_img = course.course_image;
+            ViewBag.course_duration = course.course_duration;
+            ViewBag.course_price = course.course_price;
+            return View();
+        }
+        public ActionResult adminEditCourse(string editCourse, string course_name, string course_desc, string course_image, string course_duration, string course_price)
+        {
+            int id = Convert.ToInt32(editCourse);
+            int intCourseDuration = Convert.ToInt32(course_duration);
+            double intCoursePrice = Convert.ToDouble(course_price);
+            SqlConnection con = new SqlConnection(@"Data Source=Parash\SQLEXPRESS;Initial Catalog=elearning; Integrated Security=True");
+            SqlCommand sql;
+            con.Open();
+            sql = new SqlCommand("UPDATE courses SET course_name = '" + course_name + "' WHERE course_ID = " + id + ";", con);
+            sql.ExecuteNonQuery();
+
+            sql = new SqlCommand("UPDATE courses SET course_desc = '" + course_desc + "' WHERE course_ID = " + id + ";", con);
+            sql.ExecuteNonQuery();
+            sql = new SqlCommand("UPDATE courses SET course_image = '" + course_image + "' WHERE course_ID = " + id + ";", con);
+            sql.ExecuteNonQuery();
+            sql = new SqlCommand("UPDATE courses SET course_duration = '" + intCourseDuration + "' WHERE course_ID = " + id + ";", con);
+            sql.ExecuteNonQuery();
+            sql = new SqlCommand("UPDATE courses SET course_price = '" + intCoursePrice + "' WHERE course_ID = " + id + ";", con);
+            sql.ExecuteNonQuery();
+
+            con.Close();
+            return RedirectToAction("AdminCourses");
         }
     }
 }

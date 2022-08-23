@@ -1,19 +1,27 @@
 ﻿@model IEnumerable<SD_3200_.Models.cours>
-
-@{
-    if (Session["userEmail"] == null)
-    {
-        Layout = "~/Views/Shared/generalLayout.cshtml";
+    @{
+        ViewBag.Title = "approveCourse";
+        if (Session["userEmail"] == null)
+        {
+            Layout = "~/Views/Shared/generalLayout.cshtml";
+            Layout = "~/Views/Shared/generalLayout.cshtml";
+            Response.Redirect("~/Home/LoginPage");
+        }
+        else
+        {
+            Layout = "~/Views/Shared/adminLoginLayout.cshtml";
+            Layout = "~/Views/Shared/adminLoginLayout.cshtml";
+        }
     }
-    else
-    {
-        Layout = "~/Views/Shared/loginLayout.cshtml";
-    }
-}
 <head>
     <link href="~/Content/StyleSheet1.css" rel="stylesheet" />
     <link href="~/Content/Site.css" rel="stylesheet" />
 </head>
+    
+    <head>
+        <link href="~/Content/StyleSheet1.css" rel="stylesheet" />
+        <link href="~/Content/Site.css" rel="stylesheet" />
+    </head>
 
 <div class="heroDiv" style=" text-align: center;">
     <div class="textDiv">
@@ -21,6 +29,13 @@
         <p>Choose from 100+ online video courses with new additions published every month </p>
         <p>Find courses that match your interest and get the perfect one for you</p>
         <p><a href="#Courses" class="btn btn-primary btn-lg">Explore Now</a></p>
+    <div class="heroDiv" style=" text-align: center;">
+        <div class="textDiv">
+            <h1>Welcome to Courses</h1>
+            <p>Choose from 100+ online video courses with new additions published every month </p>
+            <p>Find courses that match your interest and get the perfect one for you</p>
+            <p><a href="#Courses" class="btn btn-primary btn-lg">Explore Now</a></p>
+        </div>
     </div>
 </div>
 <!--<p>
@@ -48,13 +63,18 @@
         </th>
         <th></th>
     </tr> -->
+    <!--<p>
+        @Html.ActionLink("Create New", "Create")
+    </p>-->
+    <div id="Courses" style="margin-top:100px;">
+
         <div class="grid_">
             @foreach (var item in Model)
             {
                 <div class="card hoverLink">
                     <a href="/Home/LoginPage" style="text-decoration: none; color: black;">
                         <div class="image">
-                            <img src="~/Content/Images/@Html.DisplayFor(modelItem => item.course_image)" alt="Guitar" />
+                            <img src="~/Content/Images/@Html.DisplayFor(modelItem => item.course_image)" alt="No image" />
                         </div>
                         <div class="title textCenter">
                             <h3>@Html.DisplayFor(modelItem => item.course_name)</h3>
@@ -62,15 +82,39 @@
                         <div class="description textCenter">
                             <p>@Html.DisplayFor(modelItem => item.course_desc)</p>
                         </div>
-                        @using (Html.BeginForm("EditCourses", "cours"))
+                        <!--
+                        <div class="button textCenter">
+                            <p><a href='@{Url.Action("Delete", "cours", new{id=item.course_ID});}'>Edit/Delete Course</a></p>
+                        </div>
+                            -->
+                        @using (Html.BeginForm("Edit", "cours"))
                         {
-                            <button type="submit" name="coursedit" value="@item.course_ID">View Details</button>
-
+                            //@Html.AntiForgeryToken();
+                            <button type="submit" name="Edit" value="@item.course_ID">Edit/Remove</button>
                         }
-                        
+
                     </a>
                 </div>
+            <!--<div class="card hoverLink">
+                <a href="/Home/LoginPage" style="text-decoration: none; color: black;">
+                    <div class="image">
+                        <img src="~/Content/Images/@Html.DisplayFor(modelItem => item.course_image)" alt="Guitar" />
+                    </div>
+                    <div class="title textCenter">
+                        <h3>@Html.DisplayFor(modelItem => item.course_name)</h3>
+                    </div>
+                    <div class="description textCenter">
+                        <p>@Html.DisplayFor(modelItem => item.course_desc)</p>
+                    </div>
+                    @using (Html.BeginForm("EditCourses", "cours"))
+                    {
+                    <button type="submit" name="coursedit" value="@item.course_ID">Edit/Delete</button>
+
+                    }
+
+                </a>
+            </div>-->
             }
         </div>
 </div>
-
+    </div>

@@ -1,66 +1,80 @@
-﻿@model SD_3200_.Models.cours
+﻿@model IEnumerable<SD_3200_.Models.cours>
 
 @{
-    ViewBag.Title = "Details";
+    if (Session["userEmail"] == null)
+    {
+        Layout = "~/Views/Shared/generalLayout.cshtml";
+    }
+    else
+    {
+        Layout = "~/Views/Shared/adminLoginLayout.cshtml";
+    }
 }
+<head>
+    <link href="~/Content/StyleSheet1.css" rel="stylesheet" />
+    <link href="~/Content/Site.css" rel="stylesheet" />
+</head>
 
-<h2>Details</h2>
+<div id="Courses" style="margin-top:100px;">
+    @foreach (var item in Model)
+    {
+       <div class="title">
+            <h1>@Html.DisplayFor(modelItem => item.course_name)</h1>
+           <div class="image">
+                <img src="~/Content/Images/@Html.DisplayFor(modelItem => item.course_image)" alt="@Html.DisplayFor(modelItem => item.course_name)" />
+           </div>
+           <br/>
+           <h3>Course Description</h3>
+            <h5>@Html.DisplayFor(modelItem => item.course_desc)</h5>
+           <br/><br/>
+           <h3>Course Duration</h3>
+           <h5>This course is approximately @Html.DisplayFor(modelItem => item.course_duration) hours long</h5>
+           <br/><br/>
+           <h3>Course Price</h3>
+           <h5>Tk. @Html.DisplayFor(modelItem => item.course_price)</h5>
+       </div>
+    <br/><br/><br/>
+    <div class="align-center">
+                    @using (Html.BeginForm("AddLesson", "cours"))
+                    {
+                        <button type="submit" name="editCourse" value="@item.course_ID">Add Lesson</button>
 
-<div>
-    <h4>cours</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
+                    }
+        <br/>
+                    @using (Html.BeginForm("Edit", "cours"))
+                    {
+                        <button type="submit" name="editCourse" value="@item.course_ID">Edit</button>
+
+                    }
+        <br/>
+                    @using (Html.BeginForm("Delete", "cours"))
+                    {
+                        <button type="submit" name="editStudent" value="@item.course_ID">Delete</button>
+
+                    }
+                
+    </div>
+    }
+        <!--<tr>
+        <th>
             @Html.DisplayNameFor(model => model.course_name)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.course_name)
-        </dd>
-
-        <dt>
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.course_desc)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.course_desc)
-        </dd>
-
-        <dt>
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.course_image)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.course_image)
-        </dd>
-
-        <dt>
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.course_duration)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.course_duration)
-        </dd>
-
-        <dt>
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.course_price)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.course_price)
-        </dd>
-
-        <dt>
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.instructor.instructor_name)
-        </dt>
+        </th>
+        <th></th>
+    </tr> -->
 
-        <dd>
-            @Html.DisplayFor(model => model.instructor.instructor_name)
-        </dd>
-
-    </dl>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.course_ID }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
