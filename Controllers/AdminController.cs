@@ -48,7 +48,9 @@ namespace SD_3200_.Controllers
         }
         public ActionResult editStudent(string editStudent)
         {
-            
+            int id = Convert.ToInt32(editStudent);
+            var student = db.students.Where(c => c.studentID == id).FirstOrDefault();
+            ViewBag.studentID = student.studentID;
             return View();
         }
         public ActionResult deleteStudent(string deleteStudent)
@@ -65,5 +67,10 @@ namespace SD_3200_.Controllers
             con.Close();
             return RedirectToAction("AdminStudents");
         }
+        public ActionResult adminEditStudent()
+        {
+            return View();
+        }
     }
+
 }

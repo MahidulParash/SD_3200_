@@ -1,0 +1,19 @@
+﻿@model IEnumerable<SD_3200_.Models.student>
+@{
+    ViewBag.Title = "approveCourse";
+    if (Session["userEmail"] == null)
+    {
+        Layout = "~/Views/Shared/generalLayout.cshtml";
+        Response.Redirect("~/Home/LoginPage");
+    }
+    else
+    {
+        Layout = "~/Views/Shared/adminLoginLayout.cshtml";
+    }
+}
+    @using (Html.BeginForm("adminEditStudent", "Admin"))
+    {
+    <h2>@ViewBag.studentID</h2>
+
+    <button type="submit" name="adminStudentEdit" class="btn btn-primary" value="@ViewBag.studentID">Edit</button>
+    }
