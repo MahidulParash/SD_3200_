@@ -62,9 +62,16 @@
                         <div class="description textCenter">
                             <p>@Html.DisplayFor(modelItem => item.course_desc)</p>
                         </div>
+                        <!--
                         <div class="button textCenter">
                             <p><a href='@{Url.Action("Delete", "cours", new{id=item.course_ID});}'>Edit/Delete Course</a></p>
                         </div>
+                            -->
+                        @using (Html.BeginForm("Edit", "cours"))
+                        {
+                            @Html.AntiForgeryToken()
+                            <button type="submit" name="Edit" value="@item.course_ID">Edit/Remove</button>
+                        }
                         
                     </a>
                 </div>

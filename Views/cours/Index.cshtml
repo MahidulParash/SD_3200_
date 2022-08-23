@@ -62,9 +62,11 @@
                         <div class="description textCenter">
                             <p>@Html.DisplayFor(modelItem => item.course_desc)</p>
                         </div>
-                        <div class="button textCenter">
-                            <p><a href="/Home/LoginPage">Get Course</a></p>
-                        </div>
+                        @using (Html.BeginForm("EditCourses", "cours"))
+                        {
+                            <button type="submit" name="coursedit" value="@item.course_ID">Edit/Delete</button>
+
+                        }
                         
                     </a>
                 </div>
