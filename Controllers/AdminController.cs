@@ -41,5 +41,29 @@ namespace SD_3200_.Controllers
             con.Close();
             return RedirectToAction("approveCourse");
         }
+        public ActionResult AdminStudents()
+        {
+            var students = db.students;
+            return View(students.ToList());
+        }
+        public ActionResult editStudent(string editStudent)
+        {
+            
+            return View();
+        }
+        public ActionResult deleteStudent(string deleteStudent)
+        {
+            int id = Convert.ToInt32(deleteStudent);
+            SqlConnection con = new SqlConnection(@"Data Source=LAPTOP-AIC623KV\SQLEXPRESS;Initial Catalog=elearning; Integrated Security=True");
+            SqlCommand sql;
+            con.Open();
+            sql = new SqlCommand("DELETE FROM enroll WHERE student_ID = " + id + ";", con);
+            sql.ExecuteNonQuery();
+
+            sql = new SqlCommand("DELETE FROM student WHERE studentID = " + id + ";", con);
+            sql.ExecuteNonQuery();
+            con.Close();
+            return RedirectToAction("AdminStudents");
+        }
     }
 }
