@@ -269,6 +269,7 @@
     <Content Include="Views\Login\WatchVideo.cshtml" />
     <Content Include="Views\Admin\AdminStudents.cshtml" />
     <Content Include="Views\Admin\editStudent.cshtml" />
+    <Content Include="Views\cours\AdminCourses.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

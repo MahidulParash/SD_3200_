@@ -11,9 +11,21 @@
         Layout = "~/Views/Shared/adminLoginLayout.cshtml";
     }
 }
+
+<div align="center">
     @using (Html.BeginForm("adminEditStudent", "Admin"))
     {
-    <h2>@ViewBag.studentID</h2>
-
-    <button type="submit" name="adminStudentEdit" class="btn btn-primary" value="@ViewBag.studentID">Edit</button>
+        <h2>@ViewBag.studentID</h2>
+        <label for="sEmail">Student Email:</label>
+        <input type="email" class="form-control" id="studentEmail" name="studentEmail" value="@ViewBag.studentEmail" disabled>
+        <br>
+        <label for="sName">Student name:</label>
+        <input type="text" class="form-control" id="studentName" name="studentName" placeholder="@ViewBag.studentName" value="@ViewBag.studentName">
+        <br>
+        <label for="sPassword">Student Password:</label>
+        <input type="text" class="form-control" id="studentPassword" name="studentPassword" placeholder="@ViewBag.studentPassword" value="@ViewBag.studentPassword">
+        <br>
+        <br>
+        <button type="submit" name="adminStudentEdit" class="btn btn-primary" value="@ViewBag.studentID">Edit</button>
     }
+</div>

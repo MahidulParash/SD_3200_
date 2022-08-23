@@ -51,6 +51,9 @@ namespace SD_3200_.Controllers
             int id = Convert.ToInt32(editStudent);
             var student = db.students.Where(c => c.studentID == id).FirstOrDefault();
             ViewBag.studentID = student.studentID;
+            ViewBag.studentEmail = student.studentEmail;
+            ViewBag.studentName = student.studentName;
+            ViewBag.studentPassword = student.studentPass;
             return View();
         }
         public ActionResult deleteStudent(string deleteStudent)
@@ -67,9 +70,19 @@ namespace SD_3200_.Controllers
             con.Close();
             return RedirectToAction("AdminStudents");
         }
-        public ActionResult adminEditStudent()
+        public ActionResult adminEditStudent(string adminStudentEdit,string studentName, string studentEmail,string studentPassword)
         {
-            return View();
+            int id = Convert.ToInt32(adminStudentEdit);
+            SqlConnection con = new SqlConnection(@"Data Source=LAPTOP-AIC623KV\SQLEXPRESS;Initial Catalog=elearning; Integrated Security=True");
+            SqlCommand sql;
+            con.Open();
+            sql = new SqlCommand("UPDATE student SET studentName = '" + studentName + "' WHERE studentID = " + id + ";", con);
+            sql.ExecuteNonQuery();
+
+            sql = new SqlCommand("UPDATE student SET studentPass = '" + studentPassword + "' WHERE studentID = " + id + ";", con);
+            sql.ExecuteNonQuery();
+            con.Close();
+            return RedirectToAction("AdminStudents");
         }
     }
 
