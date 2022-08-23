@@ -1,0 +1,60 @@
+﻿@model IEnumerable<SD_3200_.Models.cours>
+
+@{
+    if (Session["userEmail"] == null)
+    {
+        Layout = "~/Views/Shared/generalLayout.cshtml";
+    }
+    else
+    {
+        Layout = "~/Views/Shared/adminLoginLayout.cshtml";
+    }
+}
+<head>
+    <link href="~/Content/StyleSheet1.css" rel="stylesheet" />
+    <link href="~/Content/Site.css" rel="stylesheet" />
+</head>
+
+<div id="Courses" style="margin-top:100px;">
+    @foreach (var item in Model)
+    {
+       <div class="title">
+            <h1>@Html.DisplayFor(modelItem => item.course_name)</h1>
+           <div class="image">
+                <img src="~/Content/Images/@Html.DisplayFor(modelItem => item.course_image)" alt="@Html.DisplayFor(modelItem => item.course_name)" />
+           </div>
+           <br/>
+           <h3>Course Description</h3>
+            <h5>@Html.DisplayFor(modelItem => item.course_desc)</h5>
+           <br/><br/>
+           <h3>Course Duration</h3>
+           <h5>This course is approximately @Html.DisplayFor(modelItem => item.course_duration) hours long</h5>
+           <br/><br/>
+           <h3>Course Price</h3>
+           <h5>Tk. @Html.DisplayFor(modelItem => item.course_price)</h5>
+       </div>
+    }
+        <!--<tr>
+        <th>
+            @Html.DisplayNameFor(model => model.course_name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.course_desc)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.course_image)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.course_duration)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.course_price)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.instructor.instructor_name)
+        </th>
+        <th></th>
+    </tr> -->
+
+</div>
+
