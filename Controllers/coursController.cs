@@ -67,7 +67,7 @@ namespace SD_3200_.Controllers
             {
                 db.courses.Add(cours);
                 db.SaveChanges();
-                return RedirectToAction("/Admin/instructorDashboard");
+                return RedirectToAction("AdminCourses");
             }
 
             ViewBag.instructor_ID = new SelectList(db.instructors, "instructor_ID", "instructor_name", cours.instructor_ID);
@@ -142,16 +142,16 @@ namespace SD_3200_.Controllers
         //    return View(cours);
         //}
 
-        //// POST: cours/Delete/5
+        // POST: cours/Delete/5
         //[HttpPost, ActionName("Delete")]
         //[ValidateAntiForgeryToken]
-        ////public ActionResult DeleteConfirmed(int id)
-        ////{
-        ////    cours cours = db.courses.Find(id);
-        ////    db.courses.Remove(cours);
-        ////    db.SaveChanges();
-        ////    return RedirectToAction("Index");
-        ////}
+        //public ActionResult Delete(int id)
+        //{
+        //    cours cours = db.courses.Find(id);
+        //    db.courses.Remove(cours);
+        //    db.SaveChanges();
+        //    return RedirectToAction("AdminCourses");
+        //}
 
         protected override void Dispose(bool disposing)
         {
@@ -165,6 +165,13 @@ namespace SD_3200_.Controllers
         public ActionResult Details(string coursedit)
         {
             var id = Convert.ToInt32(coursedit);
+            var courses = db.courses.Where(c => c.course_ID == id);
+            return View(courses.ToList());
+        }
+
+        public ActionResult CoursePage(string course_ID)
+        {
+            var id = Convert.ToInt32(course_ID);
             var courses = db.courses.Where(c => c.course_ID == id);
             return View(courses.ToList());
         }
@@ -186,7 +193,7 @@ namespace SD_3200_.Controllers
             int id = Convert.ToInt32(editCourse);
             int intCourseDuration = Convert.ToInt32(course_duration);
             double intCoursePrice = Convert.ToDouble(course_price);
-            SqlConnection con = new SqlConnection(@"Data Source=LAPTOP-AIC623KV\SQLEXPRESS;Initial Catalog=elearning; Integrated Security=True");
+            SqlConnection con = new SqlConnection(@"Data Source=Parash\SQLEXPRESS;Initial Catalog=elearning; Integrated Security=True");
             SqlCommand sql;
             con.Open();
             sql = new SqlCommand("UPDATE courses SET course_name = '" + course_name + "' WHERE course_ID = " + id + ";", con);
@@ -201,6 +208,17 @@ namespace SD_3200_.Controllers
             sql = new SqlCommand("UPDATE courses SET course_price = '" + intCoursePrice + "' WHERE course_ID = " + id + ";", con);
             sql.ExecuteNonQuery();
 
+            con.Close();
+            return RedirectToAction("AdminCourses");
+        }
+        public ActionResult DeleteCourse(string course_ID)
+        {
+            int id = Convert.ToInt32(course_ID);
+            SqlConnection con = new SqlConnection(@"Data Source=Parash\SQLEXPRESS;Initial Catalog=elearning; Integrated Security=True"); //LAPTOP-AIC623KV
+            SqlCommand sql;
+            con.Open();
+            sql = new SqlCommand("DELETE FROM courses WHERE course_ID = " + id + ";", con);
+            sql.ExecuteNonQuery();
             con.Close();
             return RedirectToAction("AdminCourses");
         }
