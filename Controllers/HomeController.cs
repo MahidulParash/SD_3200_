@@ -94,8 +94,14 @@ namespace SD_3200_.Controllers
                     Session["userPassword"] = instructorDetails.instructor_password;
 
                     Session["userRole"] = "instuctor";
-                    return RedirectToAction("instructorDashboard", "Admin");
+                    string str1 = Convert.ToString(Request.Cookies["action"].Value);
+                    string str2 = Convert.ToString(Request.Cookies["controller"].Value);
+                    if(str1==""&&str2=="")
+                         return RedirectToAction("instructorDashboard", "Admin");
+                    else
+                        return RedirectToAction(str1, str2);
                 }
+
                 else if (studentDetails != null)
                 {
                     Session["userEmail"] = studentDetails.studentEmail;

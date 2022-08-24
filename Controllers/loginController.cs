@@ -54,7 +54,8 @@ namespace SD_3200_.Controllers
         {
             Session.Abandon();
             Session["userEmail"] = null;
-        
+           
+            
             return RedirectToAction("HomePage", "Home");
         }
         

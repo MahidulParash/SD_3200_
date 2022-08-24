@@ -13,6 +13,7 @@ namespace SD_3200_.Controllers
 {
     public class AdminController : Controller
     {
+        HttpCookie kt1,kt2;
         private elearningEntities4 db = new elearningEntities4();
         // GET: Admin
         public ActionResult Index()
@@ -21,6 +22,12 @@ namespace SD_3200_.Controllers
         }
         public ActionResult instructorDashboard()
         {
+            string actionName = "instructorDashboard";
+            string controllerName = "Admin";
+            kt1 = new HttpCookie("action", actionName);
+            kt2 = new HttpCookie("controller", controllerName);
+            Response.Cookies.Add(kt1);
+            Response.Cookies.Add(kt2);
             SqlConnection con = new SqlConnection(@"Data Source=LAPTOP-AIC623KV\SQLEXPRESS;Initial Catalog=elearning; Integrated Security=True");
             SqlCommand sql;
             con.Open();
@@ -42,6 +49,7 @@ namespace SD_3200_.Controllers
             int enrolltodaycount = (Int32)sql.ExecuteScalar(); ;
             ViewBag.enrolltodayCount = enrolltodaycount;
 
+            
             sql = new SqlCommand("SELECT COUNT(studentID) FROM student;", con);
             int studentcount = (Int32)sql.ExecuteScalar(); ;
             ViewBag.studentCount = studentcount;
@@ -50,13 +58,25 @@ namespace SD_3200_.Controllers
             return View();
         }
         public ActionResult approveCourse()
-        {   
+        {
+            string actionName = "approveCourse";
+            string controllerName = "Admin";
+            kt1 = new HttpCookie("action", actionName);
+            kt2 = new HttpCookie("controller", controllerName);
+            Response.Cookies.Add(kt1);
+            Response.Cookies.Add(kt2);
             string str = "unpaid";
             var courses = db.enrolls.Where(c => c.paymentStatus == str);
             return View(courses.ToList());
         }
         public ActionResult approve(string Approved)
         {
+            string actionName = "approve";
+            string controllerName = "Admin";
+            kt1 = new HttpCookie("action", actionName);
+            kt2 = new HttpCookie("controller", controllerName);
+            Response.Cookies.Add(kt1);
+            Response.Cookies.Add(kt2);
             int id = Convert.ToInt32(Approved);
             SqlConnection con = new SqlConnection(@"Data Source=LAPTOP-AIC623KV\SQLEXPRESS;Initial Catalog=elearning; Integrated Security=True");
             SqlCommand sql;
@@ -70,6 +90,12 @@ namespace SD_3200_.Controllers
         }
         public ActionResult AdminStudents()
         {
+            string actionName = "AdminStudents";
+            string controllerName = "Admin";
+            kt1 = new HttpCookie("action", actionName);
+            kt2 = new HttpCookie("controller", controllerName);
+            Response.Cookies.Add(kt1);
+            Response.Cookies.Add(kt2);
             var students = db.students;
             return View(students.ToList());
         }

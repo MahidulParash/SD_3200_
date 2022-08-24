@@ -13,6 +13,7 @@ namespace SD_3200_.Controllers
 {
     public class coursController : Controller
     {
+        HttpCookie kt1, kt2;
         private elearningEntities4 db = new elearningEntities4();
 
         // GET: cours
@@ -24,6 +25,10 @@ namespace SD_3200_.Controllers
 
         public ActionResult AdminCourses()
         {
+            string actionName = "AdminCourses";
+            string controllerName = "cours";
+            kt1 = new HttpCookie("action", actionName);
+            kt2 = new HttpCookie("controller", controllerName);
             var courses = db.courses.Include(c => c.instructor);
             return View(courses.ToList());
         }
