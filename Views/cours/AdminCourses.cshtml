@@ -12,10 +12,18 @@
     }
     }
     
-    <head>
+<head>
+    <link href="~/Content/StyleSheet1.css" rel="stylesheet" />
+    <link href="~/Content/Site.css" rel="stylesheet" />
+    
         <link href="~/Content/StyleSheet1.css" rel="stylesheet" />
-        <link href="~/Content/Site.css" rel="stylesheet" />
-    </head>
+        <script type="text/javascript">
+        function preventBack() { window.history.forward(); }
+        setTimeout("preventBack()", 0);
+        window.onunload = function () { null };
+        </script>
+    
+</head>
 
     <div class="heroDiv" style=" text-align: center;">
         <div class="textDiv">

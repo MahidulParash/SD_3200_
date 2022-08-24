@@ -11,6 +11,21 @@
         Layout = "~/Views/Shared/adminLoginLayout.cshtml";
     }
 }
-<div align="center">
-  
+<h1 align="center">Edit your profile</h1>
+<div align="center" style="padding:100px;">
+    @using (Html.BeginForm("editinstructorProfile", "Admin"))
+    {
+       
+        <label for="iEmail">Instructor Email:</label>
+        <input type="email" class="form-control" id="instructorEmail" name="instructorEmail" value="@ViewBag.instructorEmail" disabled>
+        <br>
+        <label for="iName">Instructor name:</label>
+        <input type="text" class="form-control" id="instructorName" name="instructorName" placeholder="@ViewBag.instructorName" value="@ViewBag.instructorName">
+        <br>
+        <label for="iPassword">Instructor Password:</label>
+        <input type="text" class="form-control" id="instructorPassword" name="instructorPassword" placeholder="@ViewBag.instructorPassword" value="@ViewBag.instructorPassword">
+        <br>
+        <br>
+        <button type="submit" name="instructorProfile" class="btn btn-primary" value="@ViewBag.instructorID">Edit</button>
+    }
 </div>

@@ -11,6 +11,14 @@
         Layout = "~/Views/Shared/adminLoginLayout.cshtml";
     }
 }
+<head>
+    <link href="~/Content/StyleSheet1.css" rel="stylesheet" />
+    <script type="text/javascript">
+        function preventBack() { window.history.forward(); }
+        setTimeout("preventBack()", 0);
+        window.onunload = function () { null };
+    </script>
+</head>
 @foreach (var item in Model)
 {
     <div class="card" style="margin-top:50px">

@@ -91,6 +91,8 @@ namespace SD_3200_.Controllers
                     Session["userEmail"] = instructorDetails.instructor_email;
                     Session["userName"] = instructorDetails.instructor_name;
                     Session["userID"] = instructorDetails.instructor_ID;
+                    Session["userPassword"] = instructorDetails.instructor_password;
+
                     Session["userRole"] = "instuctor";
                     return RedirectToAction("instructorDashboard", "Admin");
                 }

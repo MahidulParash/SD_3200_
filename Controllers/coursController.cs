@@ -181,7 +181,7 @@ namespace SD_3200_.Controllers
             int id = Convert.ToInt32(editCourse);
             int intCourseDuration = Convert.ToInt32(course_duration);
             double intCoursePrice = Convert.ToDouble(course_price);
-            SqlConnection con = new SqlConnection(@"Data Source=Parash\SQLEXPRESS;Initial Catalog=elearning; Integrated Security=True");
+            SqlConnection con = new SqlConnection(@"Data Source=LAPTOP-AIC623KV\SQLEXPRESS;Initial Catalog=elearning; Integrated Security=True");
             SqlCommand sql;
             con.Open();
             sql = new SqlCommand("UPDATE courses SET course_name = '" + course_name + "' WHERE course_ID = " + id + ";", con);

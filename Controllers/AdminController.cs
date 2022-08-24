@@ -113,7 +113,28 @@ namespace SD_3200_.Controllers
         }
         public ActionResult AdminProfile()
         {
+            int id = Convert.ToInt32(Session["userID"]);
+            var instructor = db.instructors.Where(c => c.instructor_ID == id).FirstOrDefault();
+            ViewBag.instructorID = instructor.instructor_ID;
+            ViewBag.instructorEmail = instructor.instructor_email;
+            ViewBag.instructorName = instructor.instructor_name;
+            ViewBag.instructorPassword = instructor.instructor_password;
+            
             return View();
+        }
+        public ActionResult editinstructorProfile(string instructorProfile, string instructorName, string instructorPassword)
+        {
+            int id = Convert.ToInt32(instructorProfile);
+            SqlConnection con = new SqlConnection(@"Data Source=LAPTOP-AIC623KV\SQLEXPRESS;Initial Catalog=elearning; Integrated Security=True");
+            SqlCommand sql;
+            con.Open();
+            sql = new SqlCommand("UPDATE instructor SET instructor_name = '" + instructorName + "' WHERE instructor_ID = " + id + ";", con);
+            sql.ExecuteNonQuery();
+
+            sql = new SqlCommand("UPDATE instructor SET instructor_password = '" + instructorPassword + "' WHERE instructor_ID = " + id + ";", con);
+            sql.ExecuteNonQuery();
+            con.Close();
+            return RedirectToAction("AdminProfile");
         }
     }
 
