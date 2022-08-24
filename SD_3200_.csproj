@@ -193,6 +193,7 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Images\avatar.png" />
     <Content Include="Content\Images\bg_img.jpg" />
     <Content Include="Content\Images\drawing_img.jpg" />
     <Content Include="Content\Images\guitar_img.jpg" />
@@ -270,6 +271,7 @@
     <Content Include="Views\Admin\AdminStudents.cshtml" />
     <Content Include="Views\Admin\editStudent.cshtml" />
     <Content Include="Views\cours\AdminCourses.cshtml" />
+    <Content Include="Views\Admin\AdminProfile.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

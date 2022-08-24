@@ -1,0 +1,16 @@
+﻿@model IEnumerable<SD_3200_.Models.student>
+@{
+    ViewBag.Title = "approveCourse";
+    if (Session["userEmail"] == null)
+    {
+        Layout = "~/Views/Shared/generalLayout.cshtml";
+        Response.Redirect("~/Home/LoginPage");
+    }
+    else
+    {
+        Layout = "~/Views/Shared/adminLoginLayout.cshtml";
+    }
+}
+<div align="center">
+  
+</div>

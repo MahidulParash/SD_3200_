@@ -7,6 +7,7 @@ using System.Data.Entity;
 using SD_3200_.Models;
 using System.Net;
 using System.Data.SqlClient;
+using System.Globalization;
 
 namespace SD_3200_.Controllers
 {
@@ -20,6 +21,32 @@ namespace SD_3200_.Controllers
         }
         public ActionResult instructorDashboard()
         {
+            SqlConnection con = new SqlConnection(@"Data Source=LAPTOP-AIC623KV\SQLEXPRESS;Initial Catalog=elearning; Integrated Security=True");
+            SqlCommand sql;
+            con.Open();
+            //SELECT COUNT(ProductID)
+           // FROM Products;
+
+            sql = new SqlCommand("SELECT COUNT(course_ID) FROM courses;", con);
+            int coursecount= (Int32)sql.ExecuteScalar(); ;
+            ViewBag.courseCount = coursecount;
+
+            sql = new SqlCommand("SELECT COUNT(enroll_ID) FROM enroll;", con);
+            int enrollcount = (Int32)sql.ExecuteScalar(); ;
+            ViewBag.enrollCount = enrollcount;
+
+            DateTime dt = DateTime.Now;
+            string date_string = dt.ToString("yyyy-MM-dd");
+  
+            sql = new SqlCommand("SELECT COUNT(enroll_ID) FROM enroll WHERE enroll_date = '" + date_string + "';", con);
+            int enrolltodaycount = (Int32)sql.ExecuteScalar(); ;
+            ViewBag.enrolltodayCount = enrolltodaycount;
+
+            sql = new SqlCommand("SELECT COUNT(studentID) FROM student;", con);
+            int studentcount = (Int32)sql.ExecuteScalar(); ;
+            ViewBag.studentCount = studentcount;
+
+            con.Close();
             return View();
         }
         public ActionResult approveCourse()
@@ -83,6 +110,10 @@ namespace SD_3200_.Controllers
             sql.ExecuteNonQuery();
             con.Close();
             return RedirectToAction("AdminStudents");
+        }
+        public ActionResult AdminProfile()
+        {
+            return View();
         }
     }
 

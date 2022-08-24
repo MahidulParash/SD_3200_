@@ -21,4 +21,40 @@
         window.onunload = function () { null };
     </script>
 </head>
-<h2>@Session["userName"]</h2>
+<div align="center">
+    <img src="~/Content/Images/avatar.png" height="200" width="280" alt="Avatar" class="avatar">
+    <h2>Hello @Session["UserName"]!</h2>
+</div>
+<div align="center" style="padding:50px;">
+<table>
+    <tr>
+        <td style="padding:20px;">
+            <div class="card bg-info text-white">
+                <h4>Number of Courses</h4><br>
+                <h2>@ViewBag.courseCount</h2>
+            </div>
+        </td>
+        <td></td>
+        <td style="padding:20px;">
+            <div class="card bg-success text-white">
+                <h4>Number of Enrollment</h4><br>
+                <h2>@ViewBag.enrollCount</h2>
+            </div>
+        </td>
+        <td></td>
+        <td style="padding:20px;">
+            <div class="card bg-secondary text-white">
+                <h4>Number of Enrollment Today</h4><br>
+                <h2>@ViewBag.enrolltodayCount</h2>
+            </div>
+        </td>
+        <td></td>
+        <td style="padding:20px;">
+            <div class="card bg-success text-white">
+                <h4>Number of students</h4><br>
+                <h2>@ViewBag.studentCount</h2>
+            </div>
+        </td>
+    </tr>
+</table>
+</div>
