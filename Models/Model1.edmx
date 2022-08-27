@@ -75,7 +75,7 @@ warning 6002: The table/view 'elearning.dbo.answer' does not have a primary key 
           <Property Name="course_ID" Type="int" />
           <Property Name="lesson_name" Type="varchar" MaxLength="50" />
           <Property Name="lesson_desc" Type="varchar(max)" />
-          <Property Name="lesson_link" Type="varchar" MaxLength="100" />
+          <Property Name="lesson_link" Type="varchar(max)" />
         </EntityType>
         <EntityType Name="question">
           <Key>
@@ -384,7 +384,7 @@ warning 6002: The table/view 'elearning.dbo.answer' does not have a primary key 
           <Property Name="course_ID" Type="Int32" />
           <Property Name="lesson_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="lesson_desc" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="lesson_link" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="lesson_link" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="cours" Relationship="Self.FK__lessons__course___182C9B23" FromRole="lessons" ToRole="courses" />
         </EntityType>
         <EntityType Name="question">

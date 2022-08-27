@@ -43,11 +43,26 @@
        </div>
     <br/><br/><br/>
     <div class="align-center">
-                    @using (Html.BeginForm("LoginPage", "Home"))
+        @{
+            if (Session["userEmail"] == null)
                     {
-                        <button type="submit" class="btn btn-success" name="editCourse" value="@item.course_ID">Enroll Now!</button>
+                        using (Html.BeginForm("LoginPage", "Home"))
+                        {
+                            <button type="submit" class="btn btn-success" name="editCourse" value="@item.course_ID">Enroll Now!</button>
 
+                        }
                     }
+            else
+            {
+                using (Html.BeginForm("CheckEnroll", "cours"))
+                        {
+                            <button type="submit" class="btn btn-success" name="course_ID" value="@item.course_ID">Enroll Now!</button>
+
+                        }
+            }
+        }
+                    
+                    
         <br/>
                 
     </div>

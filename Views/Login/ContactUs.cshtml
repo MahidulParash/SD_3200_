@@ -1,0 +1,36 @@
+﻿
+@{
+    ViewBag.Title = "studentProfile";
+    Layout = "~/Views/Shared/loginLayout.cshtml";
+    if (Session["userEmail"] == null)
+    {
+        Response.Redirect("~/Home/LoginPage");
+    }
+}
+
+<h2>studentProfile</h2>
+<head>
+    <script type="text/javascript">
+
+                function preventBack() { window.history.forward(); }
+                setTimeout("preventBack()", 0);
+                window.onunload = function () { null }
+    </script>
+</head>
+<div class="container">
+
+    @using (Html.BeginForm("addFeedback", "login"))
+    {
+
+        <label for="semail">Student email: @ViewBag.email</label>
+        <br>
+
+        <label for="subject">Feedback</label>
+
+        <textarea id="subject" name="feedback: " placeholder="Write something.." style="height:200px;width:500px" ></textarea>
+        <br>
+        <button type="submit" name="studentID" value="@ViewBag.id">Submit</button>
+
+
+    }
+    </div>

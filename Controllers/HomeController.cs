@@ -9,6 +9,7 @@ namespace SD_3200_.Controllers
 {
     public class HomeController : Controller
     {
+        
         elearningEntities4 db = new elearningEntities4();
         public ActionResult Index()
         {
@@ -94,12 +95,12 @@ namespace SD_3200_.Controllers
                     Session["userPassword"] = instructorDetails.instructor_password;
 
                     Session["userRole"] = "instuctor";
-                    //string str1 = Convert.ToString(Request.Cookies["action"].Value);
-                    //string str2 = Convert.ToString(Request.Cookies["controller"].Value);
-                    //if(str1==""&&str2=="")
+               //     string str1 = Convert.ToString(Request.Cookies["action"].Value);
+                //    string str2 = Convert.ToString(Request.Cookies["controller"].Value);
+                  //  if(str1==""&&str2=="")
                          return RedirectToAction("instructorDashboard", "Admin");
-                    //else
-                    //    return RedirectToAction(str1, str2);
+                   // else
+                     //   return RedirectToAction(str1, str2);
                 }
 
                 else if (studentDetails != null)
@@ -108,7 +109,14 @@ namespace SD_3200_.Controllers
                     Session["userName"] = studentDetails.studentName;
                     Session["userID"] = studentDetails.studentID;
                     Session["userRole"] = "student";
-                    return RedirectToAction("studentDashboard", "login");
+                    Session["userPassword"] = studentDetails.studentPass;
+                   string str1 = Convert.ToString(Request.Cookies["studentAction"].Value);
+                   string str2 = Convert.ToString(Request.Cookies["studentController"].Value);
+                    if(str1=="" && str2=="")
+                        return RedirectToAction("studentDashboard", "login");
+                    else
+                       return RedirectToAction(str1, str2);
+                    
                 }
                 else
                 {

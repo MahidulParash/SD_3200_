@@ -28,7 +28,7 @@ namespace SD_3200_.Controllers
             kt2 = new HttpCookie("controller", controllerName);
             Response.Cookies.Add(kt1);
             Response.Cookies.Add(kt2); 
-            SqlConnection con = new SqlConnection(@"Data Source=Parash\SQLEXPRESS;Initial Catalog=elearning; Integrated Security=True"); //LAPTOP-AIC623KV
+            SqlConnection con = new SqlConnection(@"Data Source=LAPTOP-AIC623KV\SQLEXPRESS;Initial Catalog=elearning; Integrated Security=True"); //LAPTOP-AIC623KV
             SqlCommand sql;
             con.Open();
             //SELECT COUNT(ProductID)

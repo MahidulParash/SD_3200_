@@ -19,7 +19,13 @@ namespace SD_3200_.Controllers
         // GET: cours
         public ActionResult Index()
         {
-            var courses = db.courses.Include(c => c.instructor);
+            string actionName = "Index";
+            string controllerName = "cours";
+            kt1 = new HttpCookie("studentAction", actionName);
+            kt2 = new HttpCookie("studentController", controllerName);
+            Response.Cookies.Add(kt1);
+            Response.Cookies.Add(kt2);
+            var courses = db.courses;
             return View(courses.ToList());
         }
 
@@ -195,7 +201,7 @@ namespace SD_3200_.Controllers
             int id = Convert.ToInt32(editCourse);
             int intCourseDuration = Convert.ToInt32(course_duration);
             double intCoursePrice = Convert.ToDouble(course_price);
-            SqlConnection con = new SqlConnection(@"Data Source=Parash\SQLEXPRESS;Initial Catalog=elearning; Integrated Security=True");
+            SqlConnection con = new SqlConnection(@"Data Source=LAPTOP-AIC623KV\SQLEXPRESS;Initial Catalog=elearning; Integrated Security=True");
             SqlCommand sql;
             con.Open();
             sql = new SqlCommand("UPDATE courses SET course_name = '" + course_name + "' WHERE course_ID = " + id + ";", con);
@@ -216,13 +222,60 @@ namespace SD_3200_.Controllers
         public ActionResult DeleteCourse(string course_ID)
         {
             int id = Convert.ToInt32(course_ID);
-            SqlConnection con = new SqlConnection(@"Data Source=Parash\SQLEXPRESS;Initial Catalog=elearning; Integrated Security=True"); //LAPTOP-AIC623KV
+            SqlConnection con = new SqlConnection(@"Data Source=LAPTOP-AIC623KV\SQLEXPRESS;Initial Catalog=elearning; Integrated Security=True"); //LAPTOP-AIC623KV
             SqlCommand sql;
             con.Open();
             sql = new SqlCommand("DELETE FROM courses WHERE course_ID = " + id + ";", con);
             sql.ExecuteNonQuery();
             con.Close();
             return RedirectToAction("AdminCourses");
+        }
+        public ActionResult Enroll(string course_ID)
+        {
+            DateTime dt = DateTime.Now;
+            string date_string = dt.ToString("yyyy-MM-dd");
+            int student_ID = Convert.ToInt32(Session["userID"]);
+            int id = Convert.ToInt32(course_ID);
+            //var enrollDetails = db.enrolls.Where(x => x.course_ID == id && x.student_ID == student_ID).FirstOrDefault();
+            var course = db.courses.Where(c => c.course_ID == id).FirstOrDefault();
+
+            ViewBag.course_ID = course.course_ID;
+            ViewBag.course_name = course.course_name;
+            ViewBag.course_desc = course.course_desc;
+            ViewBag.course_img = course.course_image;
+            ViewBag.course_duration = course.course_duration;
+            ViewBag.course_price = course.course_price;
+            ViewBag.userEmail = Session["userEmail"];
+            ViewBag.userName = Session["userName"];
+            ViewBag.userID = Session["userID"];
+            ViewBag.date = date_string;
+            return View();
+        }
+        public ActionResult EnrollCourse(string course_ID)
+        {
+            DateTime dt = DateTime.Now;
+            string date_string = dt.ToString("yyyy-MM-dd");
+            int id = Convert.ToInt32(course_ID);
+            int student_ID = Convert.ToInt32(Session["userID"]);
+            SqlConnection con = new SqlConnection(@"Data Source=LAPTOP-AIC623KV\SQLEXPRESS;Initial Catalog=elearning; Integrated Security=True"); //LAPTOP-AIC623KV
+            SqlCommand sql;
+            con.Open();
+
+            sql = new SqlCommand("INSERT INTO enroll(course_ID, student_ID, enroll_date) Values(" + id + "," + student_ID + ",'" + date_string + "');", con);
+            sql.ExecuteNonQuery();
+            con.Close();
+            return RedirectToAction("studentDashboard","login");
+        }
+        public ActionResult CheckEnroll(string course_ID)
+        {
+            int student_ID = Convert.ToInt32(Session["userID"]);
+            int id = Convert.ToInt32(course_ID);
+            var enrollDetails = db.enrolls.Where(x => x.course_ID == id && x.student_ID == student_ID).FirstOrDefault();
+            if (enrollDetails == null)
+            {
+                return RedirectToAction("Enroll");
+            }
+            else return RedirectToAction("studentDashboard", "login");
         }
     }
 }
