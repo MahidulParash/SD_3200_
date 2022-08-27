@@ -29,6 +29,8 @@ namespace SD_3200_.Controllers
             string controllerName = "cours";
             kt1 = new HttpCookie("action", actionName);
             kt2 = new HttpCookie("controller", controllerName);
+            Response.Cookies.Add(kt1);
+            Response.Cookies.Add(kt2);
             var courses = db.courses.Include(c => c.instructor);
             return View(courses.ToList());
         }
