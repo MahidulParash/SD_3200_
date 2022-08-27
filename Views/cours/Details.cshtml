@@ -4,6 +4,7 @@
     if (Session["userEmail"] == null)
     {
         Layout = "~/Views/Shared/generalLayout.cshtml";
+        Response.Redirect("~/Home/LoginPage");
     }
     else
     {
@@ -42,47 +43,31 @@
            <h5>Tk. @Html.DisplayFor(modelItem => item.course_price)</h5>
        </div>
     <br/><br/><br/>
-    <div class="align-center">
-                    @using (Html.BeginForm("AddLesson", "cours"))
-                    {
-                        <button type="submit" name="editCourse" value="@item.course_ID">Add Lesson</button>
+              <div class="align-center">
+                  @using (Html.BeginForm("LessonList", "cours"))
+                  {
+                      <button type="submit" class="btn btn-success" name="course_ID" value="@item.course_ID">Show Lessons</button>
 
-                    }
-        <br/>
-                    @using (Html.BeginForm("Edit", "cours"))
-                    {
-                        <button type="submit" class="btn btn-primary" name="editCourse" value="@item.course_ID">Edit</button>
+                  }
+                  @using (Html.BeginForm("AddLessonForm", "cours"))
+                  {
+                      <button type="submit" name="course_id" value="@item.course_ID">Add Lesson</button>
 
-                    }
-        <br/>
-                    @using (Html.BeginForm("DeleteCourse", "cours"))
-                    {
-                        <button type="submit" name="course_ID" value="@item.course_ID">Delete</button>
+                  }
+                  <br />
+                  @using (Html.BeginForm("Edit", "cours"))
+                  {
+                      <button type="submit" class="btn btn-primary" name="editCourse" value="@item.course_ID">Edit</button>
 
-                    }
-                
-    </div>
+                  }
+                  <br />
+                  @using (Html.BeginForm("DeleteCourse", "cours"))
+                  {
+                      <button type="submit" name="course_ID" value="@item.course_ID">Delete</button>
+
+                  }
+
+              </div>
     }
-        <!--<tr>
-        <th>
-            @Html.DisplayNameFor(model => model.course_name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.course_desc)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.course_image)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.course_duration)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.course_price)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.instructor.instructor_name)
-        </th>
-        <th></th>
-    </tr> -->
-
+       
 </div>

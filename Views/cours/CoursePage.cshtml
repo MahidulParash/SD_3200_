@@ -50,19 +50,22 @@
                         {
                             <button type="submit" class="btn btn-success" name="editCourse" value="@item.course_ID">Enroll Now!</button>
 
-                        }
-                    }
+                }
+            }
             else
             {
-                using (Html.BeginForm("CheckEnroll", "cours"))
-                        {
+                if (ViewBag.flag == 1)
+                {
+                    using (Html.BeginForm("Enroll", "cours"))
+                    {
                             <button type="submit" class="btn btn-success" name="course_ID" value="@item.course_ID">Enroll Now!</button>
 
                         }
+                    }
+                }
             }
-        }
-                    
-                    
+
+
         <br/>
                 
     </div>

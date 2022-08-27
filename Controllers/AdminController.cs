@@ -22,6 +22,8 @@ namespace SD_3200_.Controllers
         }
         public ActionResult instructorDashboard()
         {
+            var feedbacks = db.feedbacks;
+            
             string actionName = "instructorDashboard";
             string controllerName = "Admin";
             kt1 = new HttpCookie("action", actionName);
@@ -55,7 +57,7 @@ namespace SD_3200_.Controllers
             ViewBag.studentCount = studentcount;
 
             con.Close();
-            return View();
+            return View(feedbacks.ToList());
         }
         public ActionResult approveCourse()
         {

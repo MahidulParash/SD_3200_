@@ -180,6 +180,16 @@ namespace SD_3200_.Controllers
         public ActionResult CoursePage(string course_ID)
         {
             var id = Convert.ToInt32(course_ID);
+            int student_ID = Convert.ToInt32(Session["userID"]);
+            var enrollDetails = db.enrolls.Where(x => x.course_ID == id && x.student_ID == student_ID).FirstOrDefault();
+            if(enrollDetails==null)
+            {
+                ViewBag.flag = 1;
+            }    
+            else
+            {
+                ViewBag.flag = 0;
+            }
             var courses = db.courses.Where(c => c.course_ID == id);
             return View(courses.ToList());
         }
@@ -238,20 +248,22 @@ namespace SD_3200_.Controllers
             int id = Convert.ToInt32(course_ID);
             //var enrollDetails = db.enrolls.Where(x => x.course_ID == id && x.student_ID == student_ID).FirstOrDefault();
             var course = db.courses.Where(c => c.course_ID == id).FirstOrDefault();
-
-            ViewBag.course_ID = course.course_ID;
-            ViewBag.course_name = course.course_name;
-            ViewBag.course_desc = course.course_desc;
-            ViewBag.course_img = course.course_image;
-            ViewBag.course_duration = course.course_duration;
-            ViewBag.course_price = course.course_price;
-            ViewBag.userEmail = Session["userEmail"];
-            ViewBag.userName = Session["userName"];
-            ViewBag.userID = Session["userID"];
-            ViewBag.date = date_string;
+            if (course != null)
+            {
+                ViewBag.course_ID = course_ID;
+                ViewBag.course_name = course.course_name;
+                ViewBag.course_desc = course.course_desc;
+                ViewBag.course_img = course.course_image;
+                ViewBag.course_duration = course.course_duration;
+                ViewBag.course_price = course.course_price;
+                ViewBag.userEmail = Session["userEmail"];
+                ViewBag.userName = Session["userName"];
+                ViewBag.userID = Session["userID"];
+                ViewBag.date = date_string;
+            }
             return View();
         }
-        public ActionResult EnrollCourse(string course_ID)
+        public ActionResult EnrollCourse(string course_ID,string transactionID)
         {
             DateTime dt = DateTime.Now;
             string date_string = dt.ToString("yyyy-MM-dd");
@@ -261,21 +273,83 @@ namespace SD_3200_.Controllers
             SqlCommand sql;
             con.Open();
 
-            sql = new SqlCommand("INSERT INTO enroll(course_ID, student_ID, enroll_date) Values(" + id + "," + student_ID + ",'" + date_string + "');", con);
+            sql = new SqlCommand("INSERT INTO enroll(course_ID, student_ID, enroll_date,transactionID) Values(" + id + "," + student_ID + ",'" + date_string + "','"+ transactionID+"');", con);
             sql.ExecuteNonQuery();
             con.Close();
             return RedirectToAction("studentDashboard","login");
         }
-        public ActionResult CheckEnroll(string course_ID)
+       
+        public ActionResult AddLessonForm(string course_id)
         {
-            int student_ID = Convert.ToInt32(Session["userID"]);
+            int id = Convert.ToInt32(course_id);
+            ViewBag.course_id =id;
+            return View();
+        }
+
+        public ActionResult AddLesson(string course_ID, string lesson_name, string lesson_desc, string lesson_link)
+        {
+
             int id = Convert.ToInt32(course_ID);
-            var enrollDetails = db.enrolls.Where(x => x.course_ID == id && x.student_ID == student_ID).FirstOrDefault();
-            if (enrollDetails == null)
-            {
-                return RedirectToAction("Enroll");
-            }
-            else return RedirectToAction("studentDashboard", "login");
+            string name = lesson_name;
+            string desc = lesson_desc;
+            string link = lesson_link;
+            SqlConnection con = new SqlConnection(@"Data Source=LAPTOP-AIC623KV\SQLEXPRESS;Initial Catalog=elearning; Integrated Security=True"); //LAPTOP-AIC623KV
+            SqlCommand sql;
+            con.Open();
+
+            sql = new SqlCommand("INSERT INTO lessons(course_ID, lesson_name, lesson_desc, lesson_link) Values(" + id + ",'" + name + "','" + desc + "','" + link +"');", con);
+            sql.ExecuteNonQuery();
+            con.Close();
+
+            return View("AddLessonForm");
+        }
+        public ActionResult LessonList(string course_ID)
+        {
+            int id = Convert.ToInt32(course_ID);
+            var lessons = db.lessons.Where(c => c.course_ID == id);
+            return View(lessons.ToList());
+        }
+        public ActionResult EditLessonForm(string lesson_ID)
+        {
+
+            int id = Convert.ToInt32(lesson_ID);
+            var lesson = db.lessons.Where(c => c.lesson_ID == id).FirstOrDefault();
+           // ViewBag.course_ID = lesson.course_ID;
+            ViewBag.lesson_name = lesson.lesson_name;
+            ViewBag.lesson_desc = lesson.lesson_desc;
+            ViewBag.lesson_link = lesson.lesson_link;
+            return View();
+        }
+
+        public ActionResult EditLesson(string lesson_ID, string lesson_name, string lesson_desc, string lesson_link)
+        {
+            int id = Convert.ToInt32(lesson_ID);
+            string name = lesson_name;
+            string desc = lesson_desc;
+            string link = lesson_link;
+            SqlConnection con = new SqlConnection(@"Data Source=LAPTOP-AIC623KV\SQLEXPRESS;Initial Catalog=elearning; Integrated Security=True");
+            SqlCommand sql;
+            con.Open();
+            sql = new SqlCommand("UPDATE lessons SET lesson_name = '" + name + "' WHERE lesson_ID = " + id + ";", con);
+            sql.ExecuteNonQuery();
+            sql = new SqlCommand("UPDATE courses SET lesson_desc = '" + lesson_desc + "' WHERE lesson_ID = " + id + ";", con);
+            sql.ExecuteNonQuery();
+            sql = new SqlCommand("UPDATE courses SET course_image = '" + lesson_link + "' WHERE lesson_ID = " + id + ";", con);
+            sql.ExecuteNonQuery();
+            con.Close();
+            return RedirectToAction("AdminCourses");
+        }
+
+        public ActionResult DeleteLesson(string lesson_ID)
+        {
+            int id = Convert.ToInt32(lesson_ID);
+            SqlConnection con = new SqlConnection(@"Data Source=LAPTOP-AIC623KV\SQLEXPRESS;Initial Catalog=elearning; Integrated Security=True"); //LAPTOP-AIC623KV
+            SqlCommand sql;
+            con.Open();
+            sql = new SqlCommand("DELETE FROM lessons WHERE lesson_ID = " + id + ";", con);
+            sql.ExecuteNonQuery();
+            con.Close();
+            return RedirectToAction("AdminCourses");
         }
     }
 }

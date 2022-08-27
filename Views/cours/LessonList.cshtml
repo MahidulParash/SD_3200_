@@ -1,0 +1,67 @@
+﻿@model IEnumerable<SD_3200_.Models.lesson>
+    @{
+    ViewBag.Title = "LessonList";
+    if (Session["userEmail"] == null)
+    {
+    Layout = "~/Views/Shared/generalLayout.cshtml";
+    Response.Redirect("~/Home/LoginPage");
+    }
+    else
+    {
+    Layout = "~/Views/Shared/adminLoginLayout.cshtml";
+    }
+    }
+    
+<head>
+    <link href="~/Content/StyleSheet1.css" rel="stylesheet" />
+    <link href="~/Content/Site.css" rel="stylesheet" />
+    
+        <link href="~/Content/StyleSheet1.css" rel="stylesheet" />
+        <script type="text/javascript">
+        function preventBack() { window.history.forward(); }
+        setTimeout("preventBack()", 0);
+        window.onunload = function () { null };
+        </script>
+    
+</head>
+@foreach (var item in Model)
+{
+    <div class="card" style="margin-top:50px">
+
+        <div class="card-body">
+            <table border="0">
+                <tr>
+                    <td>
+                        <p><b>Lesson Name: </b>@item.lesson_name</p>
+                    </td>
+                    <td>
+                    @using (Html.BeginForm("EditLessonForm", "cours"))
+                    {
+                        <button class="btn btn-primary" type="submit" name="lesson_ID" value="@item.lesson_ID">Edit</button>
+
+                    }
+                        </td>
+                    </tr>
+                <tr>
+                    <td>
+            <p><b>Lesson Description: </b>@item.lesson_desc</p>
+            </td>
+            <td>
+            @using (Html.BeginForm("DeleteLesson", "cours"))
+            {
+                <button class="btn btn-danger" type="submit" name="lesson_ID" value="@item.lesson_ID">Delete</button>
+
+            }
+                </td>
+                    </tr>
+
+                <tr>
+                    <td>
+                        <p><b>Lesson Link: </b>@item.lesson_link</p>
+                    </td>
+                    </tr>
+                </table>
+
+        </div>
+    </div>
+}

@@ -19,11 +19,10 @@
         window.onunload = function () { null };
     </script>
 </head>
+<h2 style="padding-top:50px">Student list:</h2>
 @foreach (var item in Model)
 {
     <div class="card" style="margin-top:50px">
-
-        <div class="card-body">
             <table border="0">
                 <tr>
                     <td>
@@ -32,7 +31,7 @@
                     <td>
                     @using (Html.BeginForm("editStudent", "Admin"))
                     {
-                        <button type="submit" name="editStudent" value="@item.studentID">Edit</button>
+                        <button class="btn btn-success" type="submit" name="editStudent" value="@item.studentID">Edit</button>
 
                     }
                         </td>
@@ -44,12 +43,12 @@
             <td>
             @using (Html.BeginForm("deleteStudent", "Admin"))
             {
-                <button type="submit" name="deleteStudent" value="@item.studentID">Delete</button>
+                <button class="btn btn-danger" type="submit" name="deleteStudent" value="@item.studentID">Delete</button>
 
             }
                 </td>
                     </tr>
         </div>
-    </div>
+    
 }
 

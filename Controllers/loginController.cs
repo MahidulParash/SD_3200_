@@ -76,7 +76,28 @@ namespace SD_3200_.Controllers
             kt2 = new HttpCookie("studentController", stdcontrollerName);
             Response.Cookies.Add(kt1);
             Response.Cookies.Add(kt2);
+            int id = Convert.ToInt32(Session["userID"]);
+            var student = db.students.Where(c => c.studentID == id).FirstOrDefault();
+            ViewBag.studentID = student.studentID;
+            ViewBag.studentEmail = student.studentEmail;
+            ViewBag.studentName = student.studentName;
+            ViewBag.studentPassword = student.studentPass;
             return View();
+            
+        }
+        public ActionResult editstudentProfile(string studentProfile, string studentName, string studentPassword)
+        {
+            int id = Convert.ToInt32(studentProfile);
+            SqlConnection con = new SqlConnection(@"Data Source=LAPTOP-AIC623KV\SQLEXPRESS;Initial Catalog=elearning; Integrated Security=True");
+            SqlCommand sql;
+            con.Open();
+            sql = new SqlCommand("UPDATE student SET studentName = '" + studentName + "' WHERE studentID = " + id + ";", con);
+            sql.ExecuteNonQuery();
+
+            sql = new SqlCommand("UPDATE student SET studentPass = '" + studentPassword + "' WHERE studentID = " + id + ";", con);
+            sql.ExecuteNonQuery();
+            con.Close();
+            return RedirectToAction("studentProfile");
         }
         public ActionResult ContactUs()
         {

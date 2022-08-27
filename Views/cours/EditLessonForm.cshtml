@@ -1,0 +1,36 @@
+﻿@model IEnumerable<SD_3200_.Models.lesson>
+@{
+    if (Session["userEmail"] == null)
+    {
+        Layout = "~/Views/Shared/generalLayout.cshtml";
+        Response.Redirect("~/Home/LoginPage");
+    }
+    else
+    {
+        Layout = "~/Views/Shared/adminLoginLayout.cshtml";
+    }
+}
+
+<div align="center">
+    @using (Html.BeginForm("EditLesson", "cours"))
+    {   
+        
+
+        <label for="lesson_name">Lesson Name:</label>
+        <input type="text" class="form-control" id="lesson_name" name="lesson_name" value="@ViewBag.lesson_name" >
+
+        <br/>
+
+        <label for="course_desc">Lesson Description:</label>
+        <input type="text" class="form-control" id="lesson_desc" name="lesson_desc" value="@ViewBag.lesson_desc" >
+        
+        <br/>
+
+        <label for="course_img">Lesson Link:</label>
+        <input type="text" class="form-control" id="lesson_link" name="lesson_link" value="@ViewBag.lesson_link">
+        
+        <br/><br/>
+
+        <button type="submit" class="btn btn-success" name="course_ID">Save</button>
+    }
+</div>

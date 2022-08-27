@@ -8,7 +8,7 @@
     }
 }
 
-<h2>studentProfile</h2>
+<h2 align="center" style="padding-top:100px">Edit your profile</h2>
 <head>
 <script type="text/javascript">
 
@@ -17,3 +17,20 @@
                 window.onunload = function () { null }
 </script>
     </head>
+<div align="center" style="padding:50px;">
+    @using (Html.BeginForm("editstudentProfile", "login"))
+    {
+
+        <label for="sEmail">Student Email:</label>
+        <input type="email" class="form-control" id="studentEmail" name="studentEmail" value="@ViewBag.studentEmail" disabled>
+        <br>
+        <label for="sName">Student name:</label>
+        <input type="text" class="form-control" id="studentName" name="studentName" placeholder="@ViewBag.studentName" value="@ViewBag.studentName">
+        <br>
+        <label for="iPassword">Student Password:</label>
+        <input type="text" class="form-control" id="studentPassword" name="studentPassword" placeholder="@ViewBag.studentPassword" value="@ViewBag.studentPassword">
+        <br>
+        <br>
+        <button type="submit" name="studentProfile" class="btn btn-primary" value="@ViewBag.studentID">Edit</button>
+    }
+</div>

@@ -276,6 +276,9 @@
     <Content Include="Views\cours\CoursePage.cshtml" />
     <Content Include="Views\cours\Enroll.cshtml" />
     <Content Include="Views\Login\ContactUs.cshtml" />
+    <Content Include="Views\cours\AddLessonForm.cshtml" />
+    <Content Include="Views\cours\LessonList.cshtml" />
+    <Content Include="Views\cours\EditLessonForm.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
