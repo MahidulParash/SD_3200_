@@ -1,15 +1,13 @@
 ﻿@model IEnumerable<SD_3200_.Models.cours>
     @{
-        ViewBag.Title = "approveCourse";
+        ViewBag.Title = "Courses";
         if (Session["userEmail"] == null)
         {
             Layout = "~/Views/Shared/generalLayout.cshtml";
-            Layout = "~/Views/Shared/generalLayout.cshtml";
-            Response.Redirect("~/Home/LoginPage");
+            <!--Response.Redirect("~/Home/LoginPage");-->
         }
         else
         {
-            Layout = "~/Views/Shared/adminLoginLayout.cshtml";
             Layout = "~/Views/Shared/adminLoginLayout.cshtml";
         }
     }
@@ -18,11 +16,6 @@
     <link href="~/Content/Site.css" rel="stylesheet" />
 </head>
     
-    <head>
-        <link href="~/Content/StyleSheet1.css" rel="stylesheet" />
-        <link href="~/Content/Site.css" rel="stylesheet" />
-    </head>
-
 <div class="heroDiv" style=" text-align: center;">
     <div class="textDiv">
         <h1>Welcome to Courses</h1>
@@ -81,10 +74,10 @@
                             <p><a href='@{Url.Action("Delete", "cours", new{id=item.course_ID});}'>Edit/Delete Course</a></p>
                         </div>
                             -->
-                        @using (Html.BeginForm("Edit", "cours"))
+                        @using (Html.BeginForm("CoursePage", "cours"))
                         {
                             //@Html.AntiForgeryToken();
-                            <button type="submit" name="Edit" value="@item.course_ID">Edit/Remove</button>
+                            <button type="submit" name="course_ID" value="@item.course_ID">View</button>
                         }
 
                     </a>

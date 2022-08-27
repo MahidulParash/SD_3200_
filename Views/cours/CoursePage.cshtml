@@ -43,23 +43,12 @@
        </div>
     <br/><br/><br/>
     <div class="align-center">
-                    @using (Html.BeginForm("AddLesson", "cours"))
+                    @using (Html.BeginForm("LoginPage", "Home"))
                     {
-                        <button type="submit" name="editCourse" value="@item.course_ID">Add Lesson</button>
+                        <button type="submit" class="btn btn-success" name="editCourse" value="@item.course_ID">Enroll Now!</button>
 
                     }
         <br/>
-                    @using (Html.BeginForm("Edit", "cours"))
-                    {
-                        <button type="submit" class="btn btn-primary" name="editCourse" value="@item.course_ID">Edit</button>
-
-                    }
-        <br/>
-                    @using (Html.BeginForm("DeleteCourse", "cours"))
-                    {
-                        <button type="submit" name="course_ID" value="@item.course_ID">Delete</button>
-
-                    }
                 
     </div>
     }
